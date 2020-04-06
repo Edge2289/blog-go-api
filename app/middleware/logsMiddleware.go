@@ -6,18 +6,12 @@ import (
 	log "blog-go-api/utils/logger"
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"time"
 )
 
-func StructToJsonStr(e interface{}) (string, error) {
-	if b, err := json.Marshal(e); err == nil {
-		return string(b), err
-	} else {
-		return "", err
-	}
-}
+var accessChannel = make(chan map[string]interface{})
+var accessErrChannel = make(chan int)
 
 type bodyLogWriter struct {
 	gin.ResponseWriter
@@ -39,6 +33,8 @@ func (w bodyLogWriter) WriteString(s string) (int, error) {
 */
 func LogsRequestToFile() gin.HandlerFunc {
 
+	go handleAccessChannel()
+
 	return func(c *gin.Context) {
 
 		bodyLogWriter := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
@@ -48,7 +44,6 @@ func LogsRequestToFile() gin.HandlerFunc {
 
 		// 请求参数
 		requestData := c.Request.Form.Encode() // "请求参数"
-		fmt.Println("requestData", requestData)
 
 		// 处理请求
 		c.Next()
@@ -75,7 +70,6 @@ func LogsRequestToFile() gin.HandlerFunc {
 		reponseData := make(map[string]interface{})
 
 		responseBody := bodyLogWriter.body.String()
-		fmt.Println("start :----")
 		res := jsonRequest.ResponseData{}
 		err := json.Unmarshal([]byte(responseBody), &res)
 		if err == nil{
@@ -83,7 +77,6 @@ func LogsRequestToFile() gin.HandlerFunc {
 			reponseData["Message"] = res.Message
 			reponseData["Data"] = res.Data
 		}
-		fmt.Println("end :----")
 
 		//日志格式
 		accessLogMap := make(map[string]interface{})
@@ -97,20 +90,33 @@ func LogsRequestToFile() gin.HandlerFunc {
 		accessLogMap["statusCode"]      = statusCode
 		accessLogMap["clientIP"]      = clientIP
 
-		//accessLogJson, _ := util.JsonEncode(accessLogMap)
+		//accessLogJson, _ := json.Marshal(accessLogMap)
 
-		log.Addlog(accessLogMap,config.LogDirName+"request")
-		/**
-		 状态码不等于正常 200
-		 */
-		if statusCode != 200 {
-			pushEmail()
-		}
+		accessChannel <- accessLogMap
+		// 状态码不等于正常 200
+		//if statusCode != 200{
+		//	accessErrChannel <- statusCode
+		//}
 	}
+}
+
+func handleAccessChannel()  {
+
+	for logData := range accessChannel {
+		log.Addlog(logData,config.LogDirName+"request")
+	}
+
+	/**
+	* 返回状态码不一样的时候执行
+	*/
+	//for statusCode := range accessErrChannel  {
+	//	fmt.Println("error Code :", statusCode)
+		//pushEmail(statusCode)
+	//}
 }
 /**
  推送邮箱
  */
-func pushEmail()  {
+func pushEmail(i int)  {
 
 }

@@ -60,7 +60,6 @@ func isExist(path string) bool {
 func File(m map[string]interface{}, _dir string)  {
 
 	_dir = _dir + "/" + time.GetDateDMY()+"/request-"+time.GetDateHours()+".log"
-	fmt.Print("File Save")
 	// 新建文件 或者是 目录
 	createAllFile(_dir)
 	// 写入文件 或者 新建文件夹
