@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2efa2e02-b5c6-47c1-be06-cf16a5d91102" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/1.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/handle/ArticleHandle/Get.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/handle/CateHandle/Get.go" afterDir="false" />
@@ -41,6 +41,8 @@
       <change afterPath="$PROJECT_DIR$/utils/qrcode/create.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/storage/redis/Handle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/time/time.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +61,7 @@
   </component>
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
     <option name="urls">
