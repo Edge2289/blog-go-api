@@ -1,0 +1,1 @@
+time="2020-04-04T23:14:58+08:00" level=info msg="map[clientIP:127.0.0.1 endTime:2020-04-04 23:14:58.256335 +0800 CST m=+1.793823103 latencyTime:210.614µs reponseData:返回参数 reqMethod:GET reqUri:/ping requestData:请求参数 statusCode:200]"
