@@ -18,6 +18,7 @@ const (
 	AppMode = "release" //debug or release
 	AppPort = ":9999"
 	AppName = "go-gin-api"
+	AppSalt = "blog-api-go-salt"  // 管理员加密密匙
 
 	// redis
 	RedisHost = "127.0.0.1" // redis 连接ip

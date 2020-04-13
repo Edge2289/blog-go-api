@@ -1,5 +1,5 @@
 package admin
 
-type Menu struct {
+type MenuModel struct {
 
 }
