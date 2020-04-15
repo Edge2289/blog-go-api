@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2efa2e02-b5c6-47c1-be06-cf16a5d91102" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handle/blog/V1/Admin/AdminHandle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/handle/处理层" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
@@ -23,10 +22,6 @@
       <change afterPath="$PROJECT_DIR$/common/md5.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/cn/cn.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/en.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/init.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router/AdminRouter.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/Common.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/Router.go" afterDir="false" />
@@ -40,66 +35,9 @@
       <change afterPath="$PROJECT_DIR$/utils/news/Email.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/news/Sms.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/news/news.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/pkg/utils.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/qrcode/create.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/storage/redis/Handle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/time/time.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/AUTHORS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/CONTRIBUTORS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/cmd/print-glyph-points/main.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/capjoin/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/drawer/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/freetype/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/gamma/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/genbasicfont/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/raster/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/round/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/example/truetype/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/freetype.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/freetype_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/licenses/ftl.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/licenses/gpl.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/raster/geom.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/raster/paint.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/raster/raster.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/raster/stroke.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/COPYING" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luximr.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luximr.ttx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luxirr.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luxirr.ttx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luxisr-12pt-sans-hinting.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luxisr-12pt-with-hinting.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luxisr.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/luxisr.ttx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/testdata/make-other-hinting-txts.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/face.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/face_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/glyph.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/hint.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/hint_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/opcodes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/truetype.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendor/github.com/golang/freetype/truetype/truetype_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Admin/LoginHandle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Admin/LoginHandle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/captcha.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/处理层" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/处理层" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/jwt/jwtAuthCeshi.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/admin/adminModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/adminModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/admin/menuModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/menuModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/admin/roleModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/roleModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/Common.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/Router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/json/Success.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/json/Success.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -12,7 +12,7 @@ import (
  */
 func CommonRouter()  {
 
-	fmt.Println("登陆入口")
+	fmt.Println("登陆入口 -- start")
 	r := Routers.Group("/api/v1")
 	{
 		r.POST("/login", Admin.Login)	// 登陆接口 jwtAuth.LoginMiddleWare
