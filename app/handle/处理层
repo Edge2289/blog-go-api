@@ -1,0 +1,6 @@
+
+/**
+* 返回的集合  msg 已做 i18n 处理
+*/
+	utilGin := json.Gin{Ctx: c}
+	utilGin.Success(http.StatusOK, "-1000", nil)

@@ -19,6 +19,7 @@ const (
 	AppPort = ":9999"
 	AppName = "go-gin-api"
 	AppSalt = "blog-api-go-salt"  // 管理员加密密匙
+	AppLang = "cn" // en 英文  cn  中文
 
 	// redis
 	RedisHost = "127.0.0.1" // redis 连接ip
@@ -27,11 +28,11 @@ const (
 
 	// database 数据库连接
 	DbType = "mysql"
-	DbHost = "10.10.107.162"
+	DbHost = "127.0.0.1"
 	DbPort = "3306"
-	DbDatabase = "new_erp7"
-	DbUserName = "meiquick-log"
-	DbPassword = "rjU6kIbpzfd"
+	DbDatabase = "v_blog"
+	DbUserName = "root"
+	DbPassword = "123456"
 
 
 

@@ -1,11 +1,12 @@
-package handle
+package Common
 
 import (
-"github.com/gin-gonic/gin"
-"github.com/google/uuid"
-"github.com/mojocn/base64Captcha"
-"image/color"
-"net/http"
+	"blog-go-api/utils/json"
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"github.com/mojocn/base64Captcha"
+	"image/color"
+	"net/http"
 )
 
 //configJsonBody json request body.
@@ -33,9 +34,9 @@ func GenerateCaptchaHandler(c *gin.Context) {
 
 	cap := base64Captcha.NewCaptcha(driver, store)
 	id, b64s, err := cap.Generate()
-	body := map[string]interface{}{"code": 200, "data": b64s, "id": id, "msg": "success"}
+	utilGin := json.Gin{Ctx: c}
 	if err != nil {
-		body = map[string]interface{}{"code": 0, "msg": err.Error()}
+		utilGin.Fail(http.StatusBadRequest, "获取验证码失败", nil)
 	}
-	c.JSON(http.StatusOK, body)
+	utilGin.Success(http.StatusOK, "",  map[string]interface{}{"data": b64s, "id": id})
 }

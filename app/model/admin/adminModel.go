@@ -8,10 +8,19 @@ import (
 )
 
 /**
+登陆的前台请求参数
+*/
+type LoginData struct {
+	Username string `form:"UserName" json:"username" binding:"required"`
+	Password string `form:"Password" json:"password" binding:"required"`
+}
+
+/**
  后台管理员模型
  */
-type AdminModel struct {
+type Admin struct {
 
+	Id    int `gorm:"column:id;primary_key"`
 	LoginName        string `gorm:"column:login_name;type:varchar(30);not null;index:admin_user_index"`
 	Name        string `gorm:"column:name;type:varchar(30);not null;"`
 	Password        string `gorm:"column:password;type:varchar(32);not null;"`
@@ -22,25 +31,33 @@ type AdminModel struct {
 	OperatorId        int `gorm:"column:operator_id;"`
 	OperatorName        string `gorm:"column:operator_name;"`
 
-	//RoleData []RoleModel `gprm:""`
-	//Role []RoleModel `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"role"`
-	//Menu []MenuModel `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"users"`
-}
-
-// 设置表的名称
-func (AdminModel) TableName() string {
-	return "V_admin"
+	RoleData []AdminRole `gprm:"foreignkey:UId;AssociationForeignKey:Id" json:"role_data"`
+	MenuData []MenuModel `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"menu_data"`
+	Token string
 }
 
 /**
  登陆模块
  */
-func (admin *AdminModel) Login() ([] AdminModel, error) {
+func (loginData *LoginData) LoginGetUserList() (Admin, error) {
+	var adminData Admin
+
 	fmt.Print("Login Handle")
-	return nil, nil
+	pwdenty:= EncryptionPwd(loginData.Password)
+
+	fmt.Println(loginData.Username, pwdenty)
+
+	err := db.Eloquent.Model(&adminData).Where("login_name = ? and password = ?", loginData.Username, pwdenty).First(&adminData).Error
+	if err != nil {
+		return adminData, err
+	}
+	adminData.RoleData, _ = GetRoleData(adminData.Id)
+	adminData.MenuData, _ = GetAdminMenu(adminData.Id)
+	// 查询数据库是否有这个东西
+	return adminData, nil
 }
 
-func (admin *AdminModel) Logout(token string) (status bool, err error) {
+func (admin *Admin) Logout(token string) (status bool, err error) {
 	return
 }
 
@@ -48,7 +65,7 @@ func (admin *AdminModel) Logout(token string) (status bool, err error) {
  获取管理云的全部账号
  filter  包含了搜索条件以及查询的页数
  */
-func (admin *AdminModel) GetAdminList(filter map[string]interface{}) (status bool, err error) {
+func (admin *Admin) GetAdminList(filter map[string]interface{}) (status bool, err error) {
 	//var adminList AdminModel
 	//db.Eloquent.Limit(100000).Find(&rows)
 	return false, nil
@@ -57,9 +74,11 @@ func (admin *AdminModel) GetAdminList(filter map[string]interface{}) (status boo
 /**
  新增管理员
  */
-func (admin *AdminModel) AddAdminList() (bool, error) {
+func (admin *Admin) AddAdminList() (bool, error) {
 
 	admin.Password = EncryptionPwd(admin.Password) // 密码加密
+	admin.OperatorId = 1
+	admin.OperatorName = "测试添加"
 
 	if err := db.Eloquent.Create(admin).Error; err != nil {
 		return false, err
@@ -70,14 +89,14 @@ func (admin *AdminModel) AddAdminList() (bool, error) {
 /**
  编辑管理员数据
  */
-func (admin *AdminModel) EditAdminList (id int64) (update AdminModel, err error) {
+func (admin *Admin) EditAdminList (id int64) (update Admin, err error) {
 	return
 }
 
 /**
  删除管理员 （软删除）
  */
-func (admin *AdminModel) DelAdminList (id int64) (success bool, err error) {
+func (admin *Admin) DelAdminList (id int64) (success bool, err error) {
 	return false, nil
 }
 

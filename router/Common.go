@@ -1,8 +1,9 @@
 package router
 
 import (
-	"blog-go-api/app/handle/blog/V1/Admin"
 	//jwtAuth "blog-go-api/app/middleware"
+	"blog-go-api/app/handle/blog/V1/Admin"
+	"blog-go-api/app/handle/blog/V1/Common"
 	"fmt"
 )
 
@@ -11,18 +12,13 @@ import (
  */
 func CommonRouter()  {
 
-	// the jwt middleware
-	//authMiddleware, err := jwtAuth.AuthInit()
-	//
-	//if err != nil {
-	//	_ = fmt.Errorf("JWT Error", err.Error())
-	//}
 	fmt.Println("登陆入口")
 	r := Routers.Group("/api/v1")
 	{
-		r.POST("/login", Admin.Login)	// 登陆接口
-		r.POST("/logout", )	// 登出接口
+		r.POST("/login", Admin.Login)	// 登陆接口 jwtAuth.LoginMiddleWare
+		//r.POST("/logout", jwtAuth.LogoutMiddleWare)	// 登出接口
 		r.POST("/getAdminSetting") // 获取配置接口
+		r.GET("/getCaptcha", Common.GenerateCaptchaHandler) // 获取验证码
 	}
 }
 

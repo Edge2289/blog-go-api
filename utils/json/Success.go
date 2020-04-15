@@ -1,7 +1,10 @@
 package json
 
-import "github.com/gin-gonic/gin"
-import "encoding/json"
+import (
+	"github.com/gin-gonic/gin"
+	"encoding/json"
+	"blog-go-api/resources/lang"
+)
 
 type Gin struct {
 	Ctx *gin.Context
@@ -19,9 +22,12 @@ type ResponseData struct {
  * 成功返回值
  */
 func (g *Gin) Success(code int, msg string, data interface{}) {
+	if msg == ""{
+		msg = "操作成功。"
+	}
 	g.Ctx.JSON(200, ResponseData{
 		Code    : code,
-		Message : msg,
+		Message : lang.GetLang(msg),
 		Data    : data,
 	})
 	return
@@ -32,9 +38,12 @@ func (g *Gin) Success(code int, msg string, data interface{}) {
  * 失败返回值
  */
 func (g *Gin) Fail(code int, msg string, data interface{}) {
+	if msg == ""{
+		msg = "操作失败。"
+	}
 	g.Ctx.JSON(400, ResponseData{
 		Code    : code,
-		Message : msg,
+		Message : lang.GetLang(msg),
 		Data    : data,
 	})
 	return

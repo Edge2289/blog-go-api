@@ -23,14 +23,15 @@ func init() {
 		err                                               error
 		dbType, dbName, user, password, host, tablePrefix string
 	)
+	fmt.Println("数据库连接开始")
 
 
 	dbType = config.DbType
 	dbName = config.DbDatabase
 	user = config.DbUserName
 	password = config.DbPassword
-	host = config.DbHost+":"+config.DbHost
-	tablePrefix = ""
+	host = config.DbHost
+	tablePrefix = "V_"
 
 	Eloquent, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		user,
@@ -39,6 +40,7 @@ func init() {
 		dbName))
 
 	if err != nil {
+		log.Println("数据库连接失败")
 		log.Println(err)
 	}
 
