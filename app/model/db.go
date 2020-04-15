@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-var db *gorm.DB
+var Eloquent *gorm.DB
 // 基本模型的定义
 type Model struct {
 	Id        uint `gorm:"primary_key"`
@@ -23,37 +23,41 @@ func init() {
 		err                                               error
 		dbType, dbName, user, password, host, tablePrefix string
 	)
+	fmt.Println("数据库连接开始")
 
 
 	dbType = config.DbType
 	dbName = config.DbDatabase
 	user = config.DbUserName
 	password = config.DbPassword
-	host = config.DbHost+":"+config.DbHost
-	tablePrefix = ""
+	host = config.DbHost
+	tablePrefix = "V_"
 
-	db, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
+	Eloquent, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		user,
 		password,
 		host,
 		dbName))
 
 	if err != nil {
+		log.Println("数据库连接失败")
 		log.Println(err)
 	}
 
-	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
+	gorm.DefaultTableNameHandler = func(Eloquent *gorm.DB, defaultTableName string) string {
 		return tablePrefix + defaultTableName
 	}
 
-	db.SingularTable(true)
-	db.DB().SetMaxIdleConns(10)
-	db.DB().SetMaxOpenConns(100)
+	Eloquent.SingularTable(true)
+	Eloquent.DB().SetMaxIdleConns(10)
+	Eloquent.DB().SetMaxOpenConns(100)
 }
 
+
 func CloseDB() {
-	defer db.Close()
+	defer Eloquent.Close()
 }
+
 
 //func init(){
 //	db, err := gorm.Open("mysql", "root:123456@/sys?charset=utf8&parseTime=True&loc=Local")

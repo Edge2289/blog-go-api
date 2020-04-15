@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 	"reflect"
 	"time"
 )
@@ -16,8 +17,9 @@ type UserParam struct {
 
 /**
  生成token
+userData
  */
-func GetJwtTokenMiddleware(uid string) (string, error) {
+func GetJwtTokenMiddleware(userData interface{}) (string, error) {
 
 	token := jwt.New(jwt.SigningMethodHS256)
 
@@ -25,7 +27,7 @@ func GetJwtTokenMiddleware(uid string) (string, error) {
 	claims["exp"] = time.Now().Add(time.Hour * time.Duration(1)).Unix() // 设置超时时间
 	claims["iat"] = time.Now().Unix()
 	// 存储所需要的内容
-	claims["uid"] = uid
+	claims["u_data"] = userData
 	token.Claims = claims
 
 	if tokenString, err := token.SignedString([]byte(config.JwtSecretKey)); err == nil {
@@ -35,6 +37,9 @@ func GetJwtTokenMiddleware(uid string) (string, error) {
 	}
 }
 
+func getUserData(c *gin.Context)  {
+	//c.
+}
 
 //JwtParseUser 解析payload的内容,得到用户信息
 func JwtParseUser(token string) (UserParam, error) {
@@ -46,7 +51,7 @@ func JwtParseUser(token string) (UserParam, error) {
 		}
 		return []byte(config.JwtSecretKey), nil
 	})
-	return GetIdFromClaims("uid", claims), nil
+	return GetIdFromClaims("u_data", claims), nil
 }
 
 /**

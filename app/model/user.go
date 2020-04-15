@@ -15,8 +15,8 @@ type User struct {
  创建用户数据表
  */
 func CreatedUserTable() bool {
-	if !db.HasTable(&User{}) {
-		if err := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&User{}).Error; err != nil {
+	if !Eloquent.HasTable(&User{}) {
+		if err := Eloquent.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&User{}).Error; err != nil {
 			panic(err)
 		}
 	}
@@ -41,7 +41,7 @@ func RandUserData() int {
 				}
 
 				fmt.Print(i)
-				if err := db.Create(user).Error; err != nil {
+				if err := Eloquent.Create(user).Error; err != nil {
 					fmt.Print(err)
 				}
 			}

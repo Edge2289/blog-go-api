@@ -48,7 +48,8 @@ func Run() *gin.Engine {
 	// the jwt middleware
 	//authMiddleware, _ := middleware.AuthInit()
 	//fmt.Print(authMiddleware)
-	//CommonRouter()
+	CommonRouter()
+	AdminRouter("admin")
 	//ArticleRouter("article") // 文章
 
 	// 开启端口
