@@ -8,6 +8,7 @@
       <change afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/headerMiddleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtCeshi.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/logsMiddleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/admin/adminModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/admin/menuModel.go" afterDir="false" />
@@ -19,6 +20,7 @@
       <change afterPath="$PROJECT_DIR$/app/model/user.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/user/userModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/模型层" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/验证器" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/common/md5.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
@@ -38,6 +40,17 @@
       <change afterPath="$PROJECT_DIR$/utils/qrcode/create.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/storage/redis/Handle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/time/time.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Admin/LoginHandle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Admin/LoginHandle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middleware/authMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/admin/menuModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/menuModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/cn/cn.go" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/cn/cn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/ArticleRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/Common.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/Router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,16 +108,16 @@
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vendor/github.com" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/handle/blog/V1/Common" />
       <recent name="$PROJECT_DIR$/resources/lang/en" />
       <recent name="$PROJECT_DIR$/resources/lang/cn" />
       <recent name="$PROJECT_DIR$/resources" />
       <recent name="$PROJECT_DIR$/app/handle/Blog/V1" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/vendor/github.com" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build main.go">
@@ -169,30 +182,30 @@
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="290" y="128" key="#Inspections/0.23.1440.812@0.23.1440.812" timestamp="1583418281861" />
-    <state x="297" y="205" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585988063930">
+    <state x="297" y="205" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587009626489">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="297" y="205" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.812@0.23.1440.812" timestamp="1585988063930" />
+    <state x="297" y="205" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.812@0.23.1440.812" timestamp="1587009626489" />
     <state x="78" y="136" width="1246" height="498" key="DiffContextDialog" timestamp="1586921214193">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="78" y="136" width="1246" height="498" key="DiffContextDialog/0.23.1440.812@0.23.1440.812" timestamp="1586921214193" />
-    <state width="1404" height="145" key="GridCell.Tab.0.bottom" timestamp="1586960396177">
+    <state width="1398" height="243" key="GridCell.Tab.0.bottom" timestamp="1587041926283">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1404" height="145" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1586960396177" />
-    <state width="1404" height="145" key="GridCell.Tab.0.center" timestamp="1586960396177">
+    <state width="1398" height="243" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1587041926283" />
+    <state width="1398" height="243" key="GridCell.Tab.0.center" timestamp="1587041926283">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1404" height="145" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1586960396177" />
-    <state width="1404" height="145" key="GridCell.Tab.0.left" timestamp="1586960396176">
+    <state width="1398" height="243" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1587041926283" />
+    <state width="1398" height="243" key="GridCell.Tab.0.left" timestamp="1587041926282">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1404" height="145" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1586960396176" />
-    <state width="1404" height="145" key="GridCell.Tab.0.right" timestamp="1586960396177">
+    <state width="1398" height="243" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1587041926282" />
+    <state width="1398" height="243" key="GridCell.Tab.0.right" timestamp="1587041926283">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1404" height="145" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1586960396177" />
+    <state width="1398" height="243" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1587041926283" />
     <state x="197" y="101" key="SettingsEditor" timestamp="1584154467877">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
@@ -201,10 +214,10 @@
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="453" y="65" key="refactoring.ChangeSignatureDialog/0.23.1440.812@0.23.1440.812" timestamp="1583681878469" />
-    <state x="508" y="159" width="670" height="676" key="search.everywhere.popup" timestamp="1586930586261">
+    <state x="508" y="159" width="670" height="676" key="search.everywhere.popup" timestamp="1587041343876">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="508" y="159" width="670" height="676" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1586930586261" />
+    <state x="508" y="159" width="670" height="676" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1587041343876" />
     <state x="468" y="304" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1586958972506">
       <screen x="0" y="23" width="1440" height="812" />
     </state>

@@ -50,7 +50,7 @@ func Run() *gin.Engine {
 	//fmt.Print(authMiddleware)
 	CommonRouter()
 	AdminRouter("admin")
-	//ArticleRouter("article") // 文章
+	ArticleRouter("article") // 文章
 
 	// 开启端口
 	r.Run(config.AppPort)

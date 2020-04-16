@@ -3,8 +3,9 @@ package middleware
 import (
 	//jwtAuth "blog-go-api/app/middleware/jwt"
 	//"github.com/dgrijalva/jwt-go"
-	//"blog-go-api/app/handle/blog/V1/Admin"
+	"blog-go-api/app/handle/blog/V1/Admin"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 )
 
 
@@ -18,19 +19,16 @@ import (
 		返回组装结构化 菜单
  4 返回前端用户以及菜单
  */
-func LoginMiddleWare() (bool, error) {
-	//adminUserData := Admin.Login()
-	//if adminUserData {
-	//
-	//}
-	return false, nil
+func LoginMiddleWare(c *gin.Context){
+	Admin.Login(c)
 }
 
 /**
  退出中间件
  */
 func LogoutMiddleWare()  {
-
+	//var c *gin.Context
+	//Admin.Logout
 }
 
 /**

@@ -8,8 +8,8 @@ func ArticleRouter(base string)  {
 
 	r := Routers.Group("/api/v1/" + base)
 
-	r.Use(middleware.CheckAuthRole())
-	{
-		//r.GET("/deptList", GetDeptList)
-	}
+	//r.Use(middleware.CheckJwt())
+	//{
+		r.GET("/deptList", middleware.CheckJwt)
+	//}
 }

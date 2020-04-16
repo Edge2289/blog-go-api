@@ -21,6 +21,7 @@ const (
 	AppSalt = "blog-api-go-salt"  // 管理员加密密匙
 	AppLang = "cn" // en 英文  cn  中文
 
+
 	// redis
 	RedisHost = "127.0.0.1" // redis 连接ip
 	RedisPwd   = "" // redis 连接密码
@@ -33,7 +34,6 @@ const (
 	DbDatabase = "v_blog"
 	DbUserName = "root"
 	DbPassword = "123456"
-
 
 
 

@@ -13,6 +13,7 @@ type MenuModel struct {
 	Label        string `gorm:"column:label;" json:"label"`
 	Pid        int `gorm:"column:pid;" json:"pid"`
 	Icon        string `gorm:"column:icon;" json:"icon"`
+	ApiPath        string `gorm:"column:api_path;" json:"api_path"`
 	Method        string `gorm:"column:method;" json:"method"`
 	VueRouterPath        string `gorm:"column:vue_router_path;" json:"vue_router_path"`
 	VueRouterName        string `gorm:"column:vue_router_name;" json:"vue_router_name"`
@@ -31,7 +32,7 @@ type MenuRoleModel struct {
 }
 
 /**
- 根据过来的角色id 获取
+ 根据过来的用户id 获取
  */
 func GetAdminMenu(uids int) ([]MenuModel, error) {
 
@@ -39,6 +40,16 @@ func GetAdminMenu(uids int) ([]MenuModel, error) {
 	db.Eloquent.Raw("select * from V_menu where id in (select menu_id from V_role_menu where role_id in (select role_id from V_admin_role where u_id = ?)) and is_used = 1 and deleted_at is NULL", uids).Find(&menueData)
 	menuChildren := genMenuTree(menueData,0)
 	return menuChildren, nil
+}
+
+/**
+ 供给请求方 jwt 鉴权使用
+ 应当做一下缓存 redis
+ */
+func GetAdminJwtMenu(uids int) ([]MenuModel, error) {
+	var menuData []MenuModel
+	db.Eloquent.Raw("select id, method, api_path from V_menu where id in (select menu_id from V_role_menu where role_id in (select role_id from V_admin_role where u_id = 1)) and is_used = ? and deleted_at is NULL and api_path <> \"\" and method <> \"\"", uids).Find(&menuData)
+	return menuData, nil
 }
 
 /**
