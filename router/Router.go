@@ -11,8 +11,10 @@ import (
 )
 
 var Routers *gin.Engine
+var apiRouter string
 
 func Run() *gin.Engine {
+	apiRouter = config.AppBlogRouter
 	r := gin.Default()
 
 	// 记录日志
@@ -49,7 +51,8 @@ func Run() *gin.Engine {
 	//authMiddleware, _ := middleware.AuthInit()
 	//fmt.Print(authMiddleware)
 	CommonRouter()
-	AdminRouter("admin")
+	AdminRouter("admin")  // 管理员
+	SystemRouter("system")
 	ArticleRouter("article") // 文章
 
 	// 开启端口

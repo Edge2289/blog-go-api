@@ -20,6 +20,7 @@ const (
 	AppName = "go-gin-api"
 	AppSalt = "blog-api-go-salt"  // 管理员加密密匙
 	AppLang = "cn" // en 英文  cn  中文
+	AppBlogRouter = "/api/blog/"
 
 
 	// redis

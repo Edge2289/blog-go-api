@@ -83,18 +83,7 @@ func JwtParseUser(c *gin.Context) (interface{}, error) {
 func RefaceJwtToken(claims jwt.MapClaims) (string, error) {
 
 	newToken := jwt.New(jwt.SigningMethodHS256)
-	//var newClaims jwt.MapClaims
-	// 存储所需要的内容
-	//newClaims["aud"] = config.AppName // 受众
 	claims["exp"] = time.Now().Add(time.Hour ).Unix() // 失效时间 设置超时时间 一分钟 * time.Duration(1)
-	//newClaims["iat"] = time.Now().Unix() // 签发时间
-	//newClaims["iss"] = config.AppName // 签发人
-	//newClaims["nbf"] = time.Now().Unix() // 生效时间
-	//newClaims["sub"] = "go-api-sub" // 主题
-	//newClaims["id"] = "admin id" // userData["uid"]
-
-	//newClaims["uid"] = claims["uid"]
-	//fmt.Println(newClaims["uid"])
 	// 存储所需要的内容
 	newToken.Claims = claims
 	if tokenString, err := newToken.SignedString([]byte(config.JwtSecretKey)); err == nil {

@@ -6,7 +6,7 @@ import (
 
 func AdminRouter(base string)  {
 
-	r := Routers.Group("/api/v1/" + base)
+	r := Routers.Group(apiRouter + "v1/" + base)
 
 	r.POST("/admin", Admin.AddAdmin)
 	//r.Use(middleware.CheckAuthRole())

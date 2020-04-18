@@ -14,9 +14,8 @@ import (
  * 根据用户检查是否有权限操作
  * 权限检查中间件
  */
-func CheckJwt(c *gin.Context)  {
-	panic("i am panic")
-	//return func(c *gin.Context) {
+func CheckJwt(c *gin.Context) gin.HandlerFunc {
+	return func(c *gin.Context) {
 		/**
 		 先获取token
 		 解析token  验证token
@@ -32,8 +31,8 @@ func CheckJwt(c *gin.Context)  {
 		pkg.Assert(auth, "-1003", c)
 		// parts[1]是获取到的tokenString，我们使用之前定义好的解析JWT的函数来解析它
 		// 将当前请求的username信息保存到请求的上下文c上
-		//c.Next() // 后续的处理函数可以用过c.Get("username")来获取当前请求的用户信息
-	//}
+		c.Next() // 后续的处理函数可以用过c.Get("username")来获取当前请求的用户信息
+	}
 }
 
 /**
