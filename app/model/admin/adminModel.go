@@ -42,7 +42,6 @@ type Admin struct {
 func (loginData *LoginData) LoginGetUserList() (Admin, error) {
 	var adminData Admin
 
-	fmt.Print("Login Handle")
 	pwdenty:= EncryptionPwd(loginData.Password)
 
 	fmt.Println(loginData.Username, pwdenty)

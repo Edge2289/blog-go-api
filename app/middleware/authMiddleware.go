@@ -14,7 +14,7 @@ import (
  * 根据用户检查是否有权限操作
  * 权限检查中间件
  */
-func CheckJwt(c *gin.Context) gin.HandlerFunc {
+func CheckJwt() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		/**
 		 先获取token

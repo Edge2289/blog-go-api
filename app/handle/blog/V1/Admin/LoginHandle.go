@@ -20,6 +20,12 @@ func Login(c *gin.Context) {
 	var loginVals admin.LoginData
 	//var jwtData = make(map[string]interface{})
 
+	fmt.Println("user_name --------------- ")
+	for k, v := range c.Request.PostForm {
+		fmt.Printf("k:%v\n", k)
+		fmt.Printf("v:%v\n", v)
+	}
+	fmt.Println("user_name -------   aaaa   -------- ")
 	//获取参数
 	loginVals.Username = c.Request.FormValue("user_name")
 	loginVals.Password = c.Request.FormValue("pwd")

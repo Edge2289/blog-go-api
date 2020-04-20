@@ -1,9 +1,9 @@
 package router
 
 import (
-	jwtAuth "blog-go-api/app/middleware"
 	"blog-go-api/app/handle/blog/V1/Common"
 	"blog-go-api/app/middleware"
+	jwtAuth "blog-go-api/app/middleware"
 	"fmt"
 )
 
@@ -24,7 +24,7 @@ func CommonRouter()  {
 		r.GET("/getCaptcha", Common.GenerateCaptchaHandler) // 获取验证码
 
 		// 添加访问日志
-		r.GET("addAccess", Common.addAccess)
+		r.GET("/addAccess", Common.AddAccess)
 	}
 
 	// 公共接口加载
