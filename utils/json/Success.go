@@ -41,7 +41,7 @@ func (g *Gin) Fail(code int, msg string, data interface{}) {
 	if msg == ""{
 		msg = "操作失败。"
 	}
-	g.Ctx.JSON(400, ResponseData{
+	g.Ctx.JSON(200, ResponseData{
 		Code    : code,
 		Message : lang.GetLang(msg),
 		Data    : data,

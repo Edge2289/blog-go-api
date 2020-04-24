@@ -9,6 +9,7 @@
 系统设置表  `V_system`
 
 文章表 `V_article`     
+文章内容表 `V_article_text`      
 文章标签表 `V_label`     
 文章 - 文章标签 关联表  `V_article_label`     
 文章分类 `V_category`     
@@ -19,7 +20,7 @@
 访问表     `V_source`  
 banner表     `V_branner`    
 图片库表     `V_imgs`   
-图片库分类表   `V_imgs_caregrory`
+图片库分类表   `V_imgs_caregory`
 
 用户表     `V_user`    
 用户登陆记录表     `V_user_record`

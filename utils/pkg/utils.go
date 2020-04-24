@@ -32,3 +32,15 @@ func AssertErr(err error, msg string, c *gin.Context) {
 		panic(msg)
 	}
 }
+
+// Assert 条件断言
+// 当断言条件为 假 时触发 panic
+// 对于当前请求不会再执行接下来的代码，并且返回指定格式的错误信息和错误码
+func AssertCode(code int, msg string, c *gin.Context) {
+	if code != 200 {
+		statusCode := code
+		utilGin := json.Gin{Ctx: c}
+		utilGin.Success(statusCode, msg, nil)
+		panic(msg)
+	}
+}

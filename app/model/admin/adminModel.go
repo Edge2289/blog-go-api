@@ -9,10 +9,13 @@ import (
 
 /**
 登陆的前台请求参数
+binding 代表着参数需要验证
 */
 type LoginData struct {
-	Username string `form:"UserName" json:"username" binding:"required"`
-	Password string `form:"Password" json:"password" binding:"required"`
+	Username string `form:"user_name" json:"user_name" binding:"required"`
+	Password string `form:"pwd" json:"pwd" binding:"required"`
+	Code string `form:"code" json:"code" binding:"required"`
+	UUID string `form:"uuid" json:"uuid" binding:"required"`
 }
 
 /**
