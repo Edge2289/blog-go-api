@@ -53,6 +53,9 @@ func (loginData *LoginData) LoginGetUserList() (Admin, error) {
 	if err != nil {
 		return adminData, err
 	}
+
+	// 清空密码，避免前台返回数据显示
+	adminData.Password = ""
 	adminData.RoleData, _ = GetRoleData(adminData.Id)
 	adminData.MenuData, _ = GetAdminMenu(adminData.Id)
 	// 查询数据库是否有这个东西

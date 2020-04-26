@@ -7,7 +7,6 @@ import (
 	"blog-go-api/utils/json"
 	"blog-go-api/utils/pkg"
 	jsonc "encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
 	"io/ioutil"
@@ -42,7 +41,6 @@ func Login(c *gin.Context) {
 		pkg.AssertCode(http.StatusBadRequest,"-10001", c)
 	}
 
-	fmt.Println(loginVals)
 	/**
 	 先验证  验证码是否正确
 			再判断账号密码是否正确
@@ -55,20 +53,9 @@ func Login(c *gin.Context) {
 	// 登陆操作
 	adminData, err := loginVals.LoginGetUserList()
 	pkg.AssertErr(err,"-10001", c)
-	//jwtData["uid"] = adminData.Id
-	//fmt.Println(jwtData)
-
-	//var roleData []int
-	//for _, v := range adminData.RoleData {
-	//	roleData = append(roleData, v.RId)
-	//}
-	//jwtData["roleData"] = roleData
-	//fmt.Println(jwtData)
-
 	//// 生成token 生成token 失败
 	token, err := jwt.GetJwtTokenMiddleware(adminData.Id)
 	pkg.AssertErr(err,"-10003", c)
-	fmt.Println(token)
 
 	// 设置token header 头
 	c.Header("Access-Control-Expose-Headers", "Authorization");
