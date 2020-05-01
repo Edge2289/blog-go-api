@@ -3,6 +3,7 @@ package Admin
 import (
 	"blog-go-api/app/middleware/jwt"
 	"blog-go-api/app/model/admin"
+
 	"blog-go-api/app/validators/adminValidators"
 	"blog-go-api/utils/json"
 	"blog-go-api/utils/pkg"
@@ -40,11 +41,6 @@ func Login(c *gin.Context) {
 	if loginVals.Username == "" || loginVals.Password == "" {
 		pkg.AssertCode(http.StatusBadRequest,"-10001", c)
 	}
-
-	/**
-	 先验证  验证码是否正确
-			再判断账号密码是否正确
-	 */
 
 	// 验证  验证码操作   错误码 -10002
 	if !store.Verify(loginVals.UUID, loginVals.Code, true) {

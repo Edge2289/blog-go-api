@@ -4,6 +4,7 @@ import (
 	"blog-go-api/app/config"
 	db "blog-go-api/app/model"
 	"blog-go-api/common"
+	"blog-go-api/utils/time"
 	"fmt"
 )
 
@@ -34,8 +35,12 @@ type Admin struct {
 	OperatorId        int `gorm:"column:operator_id;"`
 	OperatorName        string `gorm:"column:operator_name;"`
 
+	CreateTime string `json:"createTime" gorm:"column:created_at"`
+	UpdateTime string `json:"updateTime" gorm:"column:updated_at"`
+	DeleteTime string `json:"deleteTime" gorm:"column:deleted_at"`
+
 	RoleData []AdminRole `gprm:"foreignkey:UId;AssociationForeignKey:Id" json:"role_data"`
-	MenuData []MenuModel `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"menu_data"`
+	MenuData []Menu `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"menu_data"`
 	Token string
 }
 
@@ -49,7 +54,7 @@ func (loginData *LoginData) LoginGetUserList() (Admin, error) {
 
 	fmt.Println(loginData.Username, pwdenty)
 
-	err := db.Eloquent.Model(&adminData).Where("login_name = ? and password = ?", loginData.Username, pwdenty).First(&adminData).Error
+	err := db.Eloquent.Model(&adminData).Where("login_name = ? and password = ?", loginData.Username, pwdenty).Where("deleted_at is NULL").First(&adminData).Error
 	if err != nil {
 		return adminData, err
 	}
@@ -82,13 +87,15 @@ func (admin *Admin) GetAdminList(filter map[string]interface{}) (status bool, er
 func (admin *Admin) AddAdminList() (bool, error) {
 
 	admin.Password = EncryptionPwd(admin.Password) // 密码加密
-	admin.OperatorId = 1
-	admin.OperatorName = "测试添加"
+	// 先不添加操作人
+	//admin.OperatorId = 1
+	//admin.OperatorName = "测试添加"
+	admin.CreateTime = time.GetCurrentDate()
 
-	if err := db.Eloquent.Create(admin).Error; err != nil {
+	if err := db.Eloquent.Create(&admin).Error; err != nil {
 		return false, err
 	}
-	return false, nil
+	return true, nil
 }
 
 /**
@@ -102,7 +109,7 @@ func (admin *Admin) EditAdminList (id int64) (update Admin, err error) {
  删除管理员 （软删除）
  */
 func (admin *Admin) DelAdminList (id int64) (success bool, err error) {
-	return false, nil
+	return  false, nil
 }
 
 /**
