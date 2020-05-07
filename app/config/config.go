@@ -36,6 +36,10 @@ const (
 	DbUserName = "root"
 	DbPassword = "123456"
 
+	// 七牛云配置
+	ACCESS_KEY = "Q0zPp-M3h3Ct5-p5IFCmAmyX89ZpvQbu-DVb1dmM"
+	SECRET_KEY = "dzbhcSBBF0PnilMcMDVKz-ykLAxP5jkP0tRyKXJV"
+	BUCKET     = "treenblogimg" // 存储的空间名称
 
 
 
@@ -67,11 +71,5 @@ const (
 	// 告警开关 1=开通 -1=关闭
 	ErrorNotifyOpen = -1
 
-	/**
-	 * 这个是Jaeger的配置
-	 */
-	// Jaeger 配置信息
-	JaegerHostPort = "127.0.0.1:6831"
-	// Jaeger 配置开关 1=开通 -1=关闭
-	JaegerOpen = 1
+
 )

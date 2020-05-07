@@ -27,9 +27,26 @@ func CommonRouter()  {
 		r.GET("/addAccess", Common.AddAccess)
 	}
 
-	// 公共接口加载
-	r.Use(middleware.CheckJwt())
+	r.Group(apiRouter + "v1" )
 	{
+		// 上传图片
+		r.POST("/uploadImgs", Common.Upload)
+		r.DELETE("/uploadImgs", Common.DelImgs)
+
+		// 图片分组管理
+		r.GET("/imgGroup", Common.GetImgGroup)
+		r.DELETE("/imgGroup", Common.DelImgGroup)
+		r.OPTIONS("/imgGroup", Common.UpdateImgGroup)
+		r.POST("/imgGroup", Common.AddImgGroup)
+	}
+
+	// 公共接口加载
+	r.Group(apiRouter + "v1" ).Use(middleware.CheckJwt())
+	{
+		// 上传图片
+		r.POST("/uploadImgs", Common.Upload)
+		r.DELETE("/uploadImgs", Common.Delete)
+
 		// 菜单管理  Menu
 		//r.POST()
 

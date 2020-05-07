@@ -37,19 +37,3 @@ func LogoutMiddleWare()  {
 func CheckApiToken() {
 
 }
-
-func PayloadFuncc(data interface{}) jwt.MapClaims {
-	//if v, ok := data.(map[string]interface{}); ok {
-	//	//u, _ := v["user"].(SysUser)
-	//	//r, _ := v["role"].(SysRole)
-	//	return jwt.MapClaims{
-	//		//jwt.IdentityKey:  u.Id,
-	//		//jwt.RoleIdKey:    r.Id,
-	//		//jwt.RoleKey:      r.RoleKey,
-	//		//jwt.NiceKey:      u.Username,
-	//		//jwt.DataScopeKey: r.DataScope,
-	//		//jwt.RoleNameKey:  r.Name,
-	//	}
-	//}
-	return jwt.MapClaims{}
-}
