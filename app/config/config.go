@@ -40,6 +40,7 @@ const (
 	ACCESS_KEY = "Q0zPp-M3h3Ct5-p5IFCmAmyX89ZpvQbu-DVb1dmM"
 	SECRET_KEY = "dzbhcSBBF0PnilMcMDVKz-ykLAxP5jkP0tRyKXJV"
 	BUCKET     = "treenblogimg" // 存储的空间名称
+	ImgDomain = "http://q9onx63t3.bkt.clouddn.com/"
 
 
 

@@ -2,6 +2,7 @@ package imgs
 
 import (
 	db "blog-go-api/app/model"
+	"time"
 )
 
 //CREATE TABLE `V_imgs` (
@@ -16,15 +17,40 @@ type Imgs struct {
 	Id       int             `json:"id"`
 	Url        string `gorm:"column:url;" json:"url"`
 	CateId        int `gorm:"column:cate_id;" json:"cate_id"`
-	Domain        int `gorm:"column:domain;" json:"domain"`
+	Domain        string `gorm:"column:domain;" json:"domain"`
 
 	OperatorId        int `gorm:"column:operator_id;"`
 	OperatorName        string `gorm:"column:operator_name;"`
 
-	CreateTime string `json:"createTime" gorm:"column:created_at"`
-	UpdateTime string `json:"updateTime" gorm:"column:updated_at"`
-	DeleteTime string `json:"deleteTime" gorm:"column:deleted_at"`
+	CreateTime time.Time `json:"createTime" gorm:"column:created_at"`
+	UpdateTime time.Time `json:"updateTime" gorm:"column:updated_at"`
+	DeleteTime *time.Time `json:"deleteTime" gorm:"column:deleted_at"`
 }
+
+/**
+ 新增图片
+ */
+func (imgs *Imgs) AddImg() (bool, error) {
+
+	err := db.Eloquent.Debug().Model(&imgs).Create(&imgs).Error
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+/**
+	删除如萍
+ */
+func (imgs *Imgs) DelImg() (bool, error) {
+
+	err := db.Eloquent.Model(&imgs).Where("id = ? ", imgs.Id).Delete(&imgs).Error
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
 
 /**
  	获取图片总数
@@ -49,9 +75,15 @@ func (imgs *Imgs) GetImgsCount() (int, error) {
  */
 func (imgs *Imgs) GetImgs(page, pageSize int) ([]Imgs, error) {
 	var imgsData[] Imgs
-	dbModel := db.Eloquent.Model(&imgsData)
+	dbModel := db.Eloquent.Model(&imgs)
 	if imgs.CateId != 0 {
-		dbModel.Where("cate_id = ? ", imgs.CateId)
+		dbModel = dbModel.Where("cate_id = ? ", imgs.CateId)
+	}
+	if page == 0 {
+		page = 1
+	}
+	if pageSize == 0 {
+		pageSize = 30
 	}
 	// 分页
 	err := dbModel.Offset((page - 1) * pageSize).Limit(pageSize).Find(&imgsData).Error
@@ -59,4 +91,16 @@ func (imgs *Imgs) GetImgs(page, pageSize int) ([]Imgs, error) {
 		return imgsData, err
 	}
 	return imgsData, err
+}
+
+/**
+更新图片分类
+*/
+func (imgs *Imgs) UpdateImsCategory() (bool, error) {
+
+	err := db.Eloquent.Model(&imgs).Where("id = ? ", imgs.Id).Updates(&imgs).Error
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }

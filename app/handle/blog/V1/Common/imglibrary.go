@@ -1,29 +1,16 @@
 package Common
 
 import (
+	"blog-go-api/app/model/imgs"
 	"blog-go-api/app/service/blog/v1/common"
 	"blog-go-api/utils/json"
+	//jsonc "encoding/json"
 	"github.com/gin-gonic/gin"
+	//"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
-type imgs struct {
-
-}
-
-/**
-	上传图片
- */
-func UploadImg() {
-
-}
-
-/**
-	删除图片
- */
-func DelImgs() {
-
-}
 
 /**
 获取图片分组
@@ -32,52 +19,85 @@ func GetImgGroup(c *gin.Context) {
 	/**
 		获取前端数据
 	 */
-	utilGin := json.Gin{Ctx: c}
-	common.GetImgGroup(c)
-	var img = imgs.Imgs
-	data, err := img.GetImgsCategorys()
+	data, err := common.GetImgGroup()
 
-	if err {
+	utilGin := json.Gin{Ctx: c}
+	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
+		return
 	}
-	utilGin.StatusOK(http.StatusBadRequest, "", data)
+	utilGin.Success(http.StatusBadRequest, "", data)
 }
+
 /**
 删除图片分组
 */
-func DelImgGroup() {
+func DelImgGroup(c *gin.Context) {
 
-	var img = imgs.Imgs
-	data, err := img.GetImgsCategorys()
+	var img imgs.ImgsCategory
+	//data, _ := ioutil.ReadAll(c.Request.Body)
+	//jsonc.Unmarshal(data, &img)
 
-	if err {
-		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
+	img.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
+	bool, _ := common.DelImgGroup(img)
+
+	utilGin := json.Gin{Ctx: c}
+	if !bool {
+		utilGin.Fail(http.StatusBadRequest, "-1102", nil)
+		return
 	}
-	utilGin.StatusOK(http.StatusBadRequest, "", data)
+	utilGin.Success(http.StatusOK, "", "")
 }
+
 /**
 更新图片分组
 */
-func UpdateImgGroup() {
+func UpdateImgGroup(c *gin.Context) {
 
-	var img = imgs.Imgs
-	data, err := img.GetImgsCategorys()
+	var img imgs.ImgsCategory
+	//data, _ := ioutil.ReadAll(c.Request.Body)
+	//jsonc.Unmarshal(data, &img)
 
-	if err {
-		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
+	img.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
+	img.Name = c.Request.FormValue("name")
+	img.Sort, _ = strconv.Atoi(c.Request.FormValue("sort"))
+
+	bool, err := common.UpdateImgGroup(img)
+	utilGin := json.Gin{Ctx: c}
+
+	if err != nil {
+		utilGin.Fail(http.StatusBadRequest, "-1102", nil)
+		return
 	}
-	utilGin.StatusOK(http.StatusBadRequest, "", data)
+	if bool {
+		utilGin.Success(http.StatusOK, "", "")
+		return
+	}
+	utilGin.Fail(http.StatusBadRequest, "-1102", nil)
 }
+
+
 /**
 新增图片分组
 */
-func AddImgGroup() {
+func AddImgGroup(c *gin.Context) {
 
-	var img = imgs.Imgs
-	data, err := img.GetImgsCategorys()
+	var img imgs.ImgsCategory
+	//data, _ := ioutil.ReadAll(c.Request.Body)
+	//jsonc.Unmarshal(data, &img)
+	img.Name = c.Request.FormValue("name")
+	img.Sort, _ = strconv.Atoi(c.Request.FormValue("sort"))
 
-	if err {
-		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
+	bool, err := common.AddImgGroup(img)
+
+	utilGin := json.Gin{Ctx: c}
+	if err != nil {
+		utilGin.Fail(http.StatusBadRequest, "-1102", nil)
+		return
 	}
-	utilGin.StatusOK(http.StatusBadRequest, "", data)
+	if bool {
+		utilGin.Success(http.StatusOK, "", "")
+		return
+	}
+	utilGin.Fail(http.StatusBadRequest, "-1102", nil)
 }

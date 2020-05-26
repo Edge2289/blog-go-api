@@ -30,13 +30,15 @@ func CommonRouter()  {
 	r.Group(apiRouter + "v1" )
 	{
 		// 上传图片
-		r.POST("/uploadImgs", Common.Upload)
-		r.DELETE("/uploadImgs", Common.DelImgs)
+		r.GET("/uploadImg", Common.GetImg)
+		r.POST("/uploadImg", Common.UploadImg)
+		r.DELETE("/uploadImg", Common.DelImg)
+		r.PUT("/uploadImg", Common.MvImgCategory)
 
 		// 图片分组管理
 		r.GET("/imgGroup", Common.GetImgGroup)
 		r.DELETE("/imgGroup", Common.DelImgGroup)
-		r.OPTIONS("/imgGroup", Common.UpdateImgGroup)
+		r.PUT("/imgGroup", Common.UpdateImgGroup)
 		r.POST("/imgGroup", Common.AddImgGroup)
 	}
 
@@ -44,8 +46,8 @@ func CommonRouter()  {
 	r.Group(apiRouter + "v1" ).Use(middleware.CheckJwt())
 	{
 		// 上传图片
-		r.POST("/uploadImgs", Common.Upload)
-		r.DELETE("/uploadImgs", Common.Delete)
+		//r.POST("/uploadImgs", Common.Upload)
+		//r.DELETE("/uploadImgs", Common.Delete)
 
 		// 菜单管理  Menu
 		//r.POST()

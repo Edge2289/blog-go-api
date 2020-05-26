@@ -72,7 +72,9 @@ func (ImgsCate *ImgsCategory) GetImgsCategorys() ([]ImgsCategory, error) {
 func (ImgsCate *ImgsCategory) AddImsCategory() (bool, error) {
 
 	ImgsCate.IsState = 1
-	ImgsCate.Sort = 50
+	if ImgsCate.Sort == 0{
+		ImgsCate.Sort = 50
+	}
 	err := db.Eloquent.Debug().Model(&ImgsCate).Create(&ImgsCate).Error
 	if err != nil {
 		return false, err

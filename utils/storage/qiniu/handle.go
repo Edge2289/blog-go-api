@@ -2,11 +2,13 @@ package qiniu
 
 import (
 	"blog-go-api/app/config"
+	timeGet "blog-go-api/utils/time"
 	"context"
+	"fmt"
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/storage"
-
-	"fmt"
+	"strconv"
+	"time"
 )
 
 var (
@@ -18,7 +20,7 @@ var (
 /**
 	上传七牛云的图片
  */
-func Upload(imgData []byte) (bool, error) {
+func Upload(imgData []byte) (string, error) {
 	// 鉴权
 	mac := qbox.NewMac(accessKey, secretKey)
 
@@ -38,7 +40,7 @@ func Upload(imgData []byte) (bool, error) {
 	cfg.UseCdnDomains = false      //是否使用CDN上传加速
 
 	// 七牛key
-	qiniuKey := "qiniu/20200113/a.png"
+	newImgName := "blog/"+timeGet.GetDateDMY()+"/"+strconv.Itoa(int(time.Now().Unix()))+".png"
 
 	// 构建上传的对象
 	base64Uploader := storage.NewBase64Uploader(&cfg)
@@ -47,13 +49,14 @@ func Upload(imgData []byte) (bool, error) {
 
 	// 图片base64格式的数据 注意 需要去掉 前面类似data:image/png;base64,的数据
 
-	err := base64Uploader.Put(context.Background(), &ret, upToken, qiniuKey, imgData, nil)
+	imgData = imgData[22: ]
+	err := base64Uploader.Put(context.Background(), &ret, upToken, newImgName, imgData, nil)
 	if err != nil {
 		fmt.Println("上传文件失败,原因:", err)
-		return false, err
+		return newImgName, err
 	}
 	fmt.Println("上传成功,key为:", ret.Key)
-	return true, nil
+	return newImgName, nil
 }
 
 /**

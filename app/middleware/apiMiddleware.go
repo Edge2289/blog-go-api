@@ -4,7 +4,7 @@ import (
 	//jwtAuth "blog-go-api/app/middleware/jwt"
 	//"github.com/dgrijalva/jwt-go"
 	"blog-go-api/app/handle/blog/V1/Admin"
-	"github.com/dgrijalva/jwt-go"
+	//"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
