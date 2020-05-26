@@ -12,6 +12,10 @@
       <change afterPath="$PROJECT_DIR$/app/model/admin/adminModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/admin/menuModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/admin/roleModel.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/article/click.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/article/comments.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/article/label.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/model/article/text.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/db.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/like.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/system/configModel.go" afterDir="false" />
@@ -36,13 +40,7 @@
       <change afterPath="$PROJECT_DIR$/utils/storage/redis/Handle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/time/time.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Label/Handle.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/authMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/label/label.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/label/label.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/ArticleRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/pkg/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pkg/utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/article/categoryModel.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
