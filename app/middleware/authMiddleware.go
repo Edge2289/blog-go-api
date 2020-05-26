@@ -3,6 +3,7 @@ package middleware
 import (
 	"blog-go-api/app/middleware/jwt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strings"
 
 	"blog-go-api/app/model/admin"
@@ -23,6 +24,10 @@ func CheckJwt() gin.HandlerFunc {
 			2：没过期，没权限  返回
 		    3：next()
 		*/
+		authToken := c.Request.Header.Get("Authorization")
+		if authToken == "" {
+			pkg.AssertCode(http.StatusBadRequest, "-1003", c)
+		}
 		userData, err := jwt.JwtParseUser(c)
 		pkg.AssertErr(err, "-1003", c)
 

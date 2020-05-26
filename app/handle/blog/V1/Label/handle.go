@@ -1,10 +1,13 @@
 package Label
 
 import (
+	labelModel "blog-go-api/app/model/label"
+	labelService "blog-go-api/app/service/blog/v1/label"
+	"blog-go-api/utils/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-	labelService "blog-go-api/app/service/blog/v1/label"
 )
 
 /**
@@ -19,7 +22,11 @@ func AddLabel(c *gin.Context) {
 	label.Label = c.Request.FormValue("label")
 	label.Color = c.Request.FormValue("color")
 	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
-	data, err := labelService.AddLabel(label);
+	fmt.Println("------------------")
+	fmt.Println(label)
+	fmt.Println("------------------")
+	data, err := labelService.AddLabel(label)
+	utilGin := json.Gin{Ctx: c}
 	if err != nil || !data {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
@@ -41,6 +48,13 @@ func UpdateLabel(c *gin.Context) {
 	label.Color = c.Request.FormValue("color")
 	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
 
+	data, err := labelService.UpdateLabel(label);
+	utilGin := json.Gin{Ctx: c}
+	if err != nil || !data {
+		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
+		return
+	}
+	utilGin.Success(http.StatusOK, "", data)
 }
 
 /**
@@ -53,7 +67,13 @@ func DelLabel(c *gin.Context) {
 	//jsonc.Unmarshal(data, &label)
 
 	label.Id,_ = strconv.Atoi(c.Request.FormValue("id"))
-
+	data, err := labelService.DelLabel(label);
+	utilGin := json.Gin{Ctx: c}
+	if err != nil || !data {
+		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
+		return
+	}
+	utilGin.Success(http.StatusOK, "", data)
 }
 
 /**
@@ -67,4 +87,14 @@ func GetLabel(c *gin.Context) {
 	label.Label = c.Request.FormValue("label")
 	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
 
+	page,_ := strconv.Atoi(c.Request.FormValue("page"))
+	pageSize,_ := strconv.Atoi(c.Request.FormValue("pageSize"))
+
+	data, err := labelService.GetLabel(label, page, pageSize);
+	utilGin := json.Gin{Ctx: c}
+	if err != nil{
+		utilGin.Fail(http.StatusBadRequest, "-1101", data)
+		return
+	}
+	utilGin.Success(http.StatusOK, "", data)
 }

@@ -18,7 +18,7 @@ import (
  */
 type Label struct {
 
-	Id       int             `json:"id"`
+	Id       int `json:"id"`
 	Label        string `gorm:"column:label;" json:"label"`
 	Color        string `gorm:"column:color;" json:"color"`
 	IsState        int `gorm:"column:is_state;" json:"is_state"`
@@ -75,13 +75,10 @@ func (label Label) GetLabel(page, pageSize int) ([]Label, error) {
 	var labelData[] Label
 	labelModel := db.Eloquent.Model(&label)
 	if label.Label != "" {
-		labelModel = labelModel.Where("label like %?%",label.Label )
+		labelModel = labelModel.Where("label like ?", "%"+label.Label+"%")
 	}
-	if page == 0 {
-		page = 1
-	}
-	if pageSize == 0 {
-		pageSize = 30
+	if label.IsState != -1 {
+		labelModel = labelModel.Where("is_state = ?",label.IsState )
 	}
 
 	error :=labelModel.Offset((page-1) * pageSize).Limit(pageSize).Find(&labelData).Error

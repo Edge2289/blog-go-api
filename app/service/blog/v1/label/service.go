@@ -2,8 +2,6 @@ package label
 
 import (
 	labelModel "blog-go-api/app/model/label"
-	"github.com/gin-gonic/gin"
-	"strconv"
 )
 
 /**
@@ -18,20 +16,33 @@ func AddLabel(label labelModel.Label) (bool, error) {
 /**
 	更新
 */
-func UpdateLabel(c *gin.Context) {
+func UpdateLabel(label labelModel.Label) (bool, error) {
 
+	i ,error := label.UpdateLabel()
+	return i, error
 }
 
 /**
 	删除
 */
-func DelLabel(c *gin.Context) {
+func DelLabel(label labelModel.Label) (bool, error) {
 
+	i ,error := label.DelLabel()
+	return i, error
 }
 
 /**
 	查询
 */
-func GetLabel(c *gin.Context) {
+func GetLabel(label labelModel.Label, page, pageSize int) ([] labelModel.Label, error) {
 
+	if page == 0 {
+		page = 1
+	}
+	if pageSize == 0 {
+		pageSize = 30
+	}
+
+	labelData, error := label.GetLabel(page, pageSize)
+	return labelData, error
 }

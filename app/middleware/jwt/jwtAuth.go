@@ -99,6 +99,9 @@ func RefaceJwtToken(claims jwt.MapClaims) (string, error) {
 func ExtractToken(c *gin.Context) ( string, string) {
 	authHeader := c.Request.Header.Get("Authorization")
 
+	if authHeader == "" {
+		return "", "auth为空"
+	}
 	// 按空格分割
 	parts := strings.SplitN(authHeader, " ", 2)
 	fmt.Println(parts)

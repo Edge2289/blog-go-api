@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2efa2e02-b5c6-47c1-be06-cf16a5d91102" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handle/blog/V1/Common/uploadimg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handle/blog/V1/Label/Handle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/handle/处理层" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
@@ -15,19 +13,16 @@
       <change afterPath="$PROJECT_DIR$/app/model/admin/menuModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/admin/roleModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/model/label/label.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/like.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/system/configModel.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/test/likes.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/user.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/model/user/userModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/common/md5.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/Common.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/router/Router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/api/imgutils/uploadImg_test.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/json/Success.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/logger/drive/LoggerToES.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/logger/drive/LoggerToFile.go" afterDir="false" />
@@ -41,16 +36,13 @@
       <change afterPath="$PROJECT_DIR$/utils/storage/redis/Handle.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/utils/time/time.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Common/imglibrary.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Common/imglibrary.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/imgs/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/imgs/handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/imgs/img.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/imgs/img.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/blog/v1/common/imglibrary.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/blog/v1/common/imglibrary.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/cn/cn.go" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/cn/cn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/Common.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/storage/qiniu/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/storage/qiniu/handle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Label/Handle.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middleware/authMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/label/label.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/label/label.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/router/ArticleRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/pkg/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pkg/utils.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,25 +240,25 @@
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="78" y="136" width="1246" height="498" key="DiffContextDialog/0.23.1440.812@0.23.1440.812" timestamp="1586921214193" />
-    <state width="1398" height="209" key="GridCell.Tab.0.bottom" timestamp="1590419261295">
+    <state width="1398" height="209" key="GridCell.Tab.0.bottom" timestamp="1590459768070">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1590419261295" />
+    <state width="1398" height="209" key="GridCell.Tab.0.bottom/0.23.1440.812@0.23.1440.812" timestamp="1590459768070" />
     <state width="1398" height="209" key="GridCell.Tab.0.bottom/0.23.1440.814@0.23.1440.814" timestamp="1590390814356" />
-    <state width="1398" height="209" key="GridCell.Tab.0.center" timestamp="1590419261295">
+    <state width="1398" height="209" key="GridCell.Tab.0.center" timestamp="1590459768070">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1590419261295" />
+    <state width="1398" height="209" key="GridCell.Tab.0.center/0.23.1440.812@0.23.1440.812" timestamp="1590459768070" />
     <state width="1398" height="209" key="GridCell.Tab.0.center/0.23.1440.814@0.23.1440.814" timestamp="1590390814356" />
-    <state width="1398" height="209" key="GridCell.Tab.0.left" timestamp="1590419261294">
+    <state width="1398" height="209" key="GridCell.Tab.0.left" timestamp="1590459768069">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1590419261294" />
+    <state width="1398" height="209" key="GridCell.Tab.0.left/0.23.1440.812@0.23.1440.812" timestamp="1590459768069" />
     <state width="1398" height="209" key="GridCell.Tab.0.left/0.23.1440.814@0.23.1440.814" timestamp="1590390814355" />
-    <state width="1398" height="209" key="GridCell.Tab.0.right" timestamp="1590419261295">
+    <state width="1398" height="209" key="GridCell.Tab.0.right" timestamp="1590459768070">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state width="1398" height="209" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1590419261295" />
+    <state width="1398" height="209" key="GridCell.Tab.0.right/0.23.1440.812@0.23.1440.812" timestamp="1590459768070" />
     <state width="1398" height="209" key="GridCell.Tab.0.right/0.23.1440.814@0.23.1440.814" timestamp="1590390814356" />
     <state x="344" y="87" key="SettingsEditor" timestamp="1588388816685">
       <screen x="0" y="23" width="1440" height="812" />
