@@ -1,14 +1,16 @@
 package main
 
 import (
-	"blog-go-api/app/config"
-	imgsModel "blog-go-api/app/model/imgs"
+	// "blog-go-api/app/config"
+	// imgsModel "blog-go-api/app/model/imgs"
 	//"blog-go-api/router"
 	"fmt"
+
+	redisService "blog-go-api/utils/storage/redis"
 )
 
 func main() {
-	fmt.Print("------------------------------------ ")
+	/**		fmt.Print("------------------------------------ ")
 	fmt.Print("---------   WEB BLOG API   --------- ")
 	fmt.Print("---                              --- ")
 	fmt.Print("---  appName:"+config.AppName+"  --- ")
@@ -27,6 +29,12 @@ func main() {
 	}
 	fmt.Println("data", data)
 	fmt.Println("datas", datas)
-	//router.Run()
+	//router.Run()*/
+	test()
 }
 
+
+func test() {
+	ii := redisService.Set("a", "xxx")
+	fmt.Print(ii)
+}

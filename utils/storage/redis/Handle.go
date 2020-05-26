@@ -27,10 +27,12 @@ type Data struct {
  */
 func Get(name string)  {
 
+	fmt.Print(name)
 	//go Handle()
 	accessLogMap := make(map[string]interface{})
 	accessLogMap["type"] = "set"
 	accessLogMap["name"] = name
+	fmt.Print(accessLogMap)
 
 	//accessLogJson, _ := json.Encode(accessLogMap)
 	//RedisChannel <- accessLogMap
@@ -43,11 +45,15 @@ func Set(name string, data string) int {
 
 	wg.Add(1)
 
+	fmt.Print("123123")
 	go _Handle()
 	//return func() {
 		person := Data{"set", name, data, 0}
+	fmt.Print("1xxx")
 		personChan <- person
+	fmt.Print("3xxx")
 	wg.Wait()
+	fmt.Print("44fffxx")
 	return 123213
 	//}
 }
@@ -72,7 +78,7 @@ func SetEx(name string, data string, ex int)  {
 /**
  * 全局处理redis 的函数
  */
-func _Handle()  {
+func _Handle() int {
 
 	//c, err := redis.Dial("tcp", "127.0.0.1:6379")
 	//if err != nil {
@@ -83,8 +89,9 @@ func _Handle()  {
 	//fmt.Print(data)
 	//fmt.Print()
 	newPerson := <- personChan
-	fmt.Printf("new person %s", newPerson._type)
+	fmt.Printf("new person %s", newPerson.data)
 	defer wg.Add(-1)
+	return 123
 	//fmt.Print()
 
 	//switch data {
