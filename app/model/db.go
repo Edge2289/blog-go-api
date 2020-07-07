@@ -47,7 +47,8 @@ func init() {
 	gorm.DefaultTableNameHandler = func(Eloquent *gorm.DB, defaultTableName string) string {
 		return tablePrefix + defaultTableName
 	}
-
+	// 启用Logger，显示详细日志
+	Eloquent.LogMode(true)
 	Eloquent.SingularTable(true)
 	Eloquent.DB().SetMaxIdleConns(10)
 	Eloquent.DB().SetMaxOpenConns(100)

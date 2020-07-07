@@ -5,7 +5,6 @@ import (
 	db "blog-go-api/app/model"
 	"blog-go-api/common"
 	"blog-go-api/utils/time"
-	"fmt"
 )
 
 /**
@@ -51,8 +50,6 @@ func (loginData *LoginData) LoginGetUserList() (Admin, error) {
 	var adminData Admin
 
 	pwdenty:= EncryptionPwd(loginData.Password)
-
-	fmt.Println(loginData.Username, pwdenty)
 
 	err := db.Eloquent.Model(&adminData).Where("login_name = ? and password = ?", loginData.Username, pwdenty).Where("deleted_at is NULL").First(&adminData).Error
 	if err != nil {

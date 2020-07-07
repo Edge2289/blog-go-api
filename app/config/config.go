@@ -1,17 +1,5 @@
 package config
 
-var (
-	ApiAuthConfig = map[string] map[string]string {
-
-		// 调用方
-		"DEMO" : {
-			"md5" : "IgkibX71IEf382PT",
-			"aes" : "IgkibX71IEf382PT",
-			"rsa" : "rsa/public.pem",
-		},
-	}
-)
-
 const (
 
 	// 网站配置
@@ -21,7 +9,6 @@ const (
 	AppSalt = "blog-api-go-salt"  // 管理员加密密匙
 	AppLang = "cn" // en 英文  cn  中文
 	AppBlogRouter = "/api/blog/"
-
 
 	// redis
 	RedisHost = "127.0.0.1" // redis 连接ip
@@ -36,13 +23,19 @@ const (
 	DbUserName = "root"
 	DbPassword = "123456"
 
+	// RabbitMQ
+	MqHost = "10.10.107.36:15672" // 连接名
+	MqUser = "admin"
+	MqPwd = "123456"
+
 	// 七牛云配置
 	ACCESS_KEY = "Q0zPp-M3h3Ct5-p5IFCmAmyX89ZpvQbu-DVb1dmM"
 	SECRET_KEY = "dzbhcSBBF0PnilMcMDVKz-ykLAxP5jkP0tRyKXJV"
 	BUCKET     = "treenblogimg" // 存储的空间名称
 	ImgDomain = "http://q9onx63t3.bkt.clouddn.com/"
 
-
+	// es
+	ES_HOST = "http://139.9.38.4:9200/"
 
 	// JWT加密参数
 	JwtSecretKey = "xiaoxiao-blog-gp-api"

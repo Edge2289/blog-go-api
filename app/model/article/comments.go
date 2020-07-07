@@ -2,7 +2,6 @@ package article
 
 import (
 	"time"
-	db "blog-go-api/app/model"
 )
 /**
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -18,6 +17,7 @@ type ArticleComments struct {
 	Id       int `json:"id"`
 	UId        int `gorm:"column:u_id;" json:"u_id"`
 	Comment    string `gorm:"column:comment;" json:"comment"`
+	ArticleId    int `gorm:"column:article_id;" json:"article_id"`
 	IsState    int `gorm:"column:is_state;" json:"is_state"`
 	PId    int `gorm:"column:p_id;" json:"p_id"`
 	Click    int `gorm:"column:click;" json:"click"`

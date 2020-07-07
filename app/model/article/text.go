@@ -2,7 +2,6 @@ package article
 
 import (
 	"time"
-	db "blog-go-api/app/model"
 )
 /**
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -23,4 +22,25 @@ type ArticleText struct {
 	CreateTime time.Time `json:"createTime" gorm:"column:created_at"`
 	UpdateTime time.Time `json:"updateTime" gorm:"column:updated_at"`
 	DeleteTime *time.Time `json:"deleteTime" gorm:"column:deleted_at"`
+}
+
+/**
+	新增
+ */
+func AddArticleText(articleText ArticleText) (bool, error) {
+
+	err := db.Model(&articleText).Create(&articleText).Error
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func UpdateArticleText(articleText ArticleText) (bool, error) {
+
+	err := db.Where("id = ?", articleText.Id).Update(&articleText).Error
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }
