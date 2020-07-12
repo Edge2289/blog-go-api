@@ -1,4 +1,4 @@
-package _news
+package news
 
 
 type NewsStruct interface {
