@@ -2,7 +2,6 @@ package article
 
 import (
 	"time"
-	db "blog-go-api/app/model"
 )
 /**
   `id` int(11) NOT NULL AUTO_INCREMENT,
