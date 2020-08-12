@@ -58,7 +58,7 @@ var db = dbModel.Eloquent
 	可搜索参数：文章分类，文章类别，文章名称
 	按照创建时间排序
  */
-func (article Article) GetSearchList(label, page, pageSize int) ([]Article, error) {
+func (article Article) GetSearchList(label string, page, pageSize int) ([]Article, int, error) {
 
 	var articleList []Article
 	articleModel := db.Model(&articleList)
@@ -66,11 +66,11 @@ func (article Article) GetSearchList(label, page, pageSize int) ([]Article, erro
 		// 分类搜索条件不为0
 		articleModel = articleModel.Where("cate_id = ? ", article.CateId)
 	}
-	if label != 0 {
+	if label != "" {
 		var articleLabelList []ArticleLabel
 		err := db.Model(&articleLabelList).Debug().Select("article_id").Where("label_id = ?", label).Find(&articleLabelList).Error
 		if err != nil {
-			return articleList, err
+			return articleList, 0,err
 		}
 		var ids []interface{}
 		for _, v := range articleLabelList  {
@@ -82,12 +82,27 @@ func (article Article) GetSearchList(label, page, pageSize int) ([]Article, erro
 		// 标题搜索条件不为0
 		articleModel = articleModel.Where("title like ?", "%"+article.Title+"%")
 	}
-	err := articleModel.Preload("LabelData").Find(&articleList).Error
-	if err != nil {
-		return articleList, err
+	if article.CateId != 0 {
+		// 标题搜索条件不为0
+		articleModel = articleModel.Where("cate_id = ?", article.CateId)
 	}
+	if article.Nick != "" {
+		// 标题搜索条件不为0
+		articleModel = articleModel.Where("nick like ? ", "%"+article.Nick+"%")
+	}
+	if article.IsState != 0 {
+		// 标题搜索条件不为0
+		articleModel = articleModel.Where("is_state = ?", article.IsState)
+	}
+
+	err := articleModel.Preload("LabelData").Offset((page - 1) * pageSize).Limit(pageSize).Find(&articleList).Error
+	if err != nil {
+		return articleList, 0, err
+	}
+	var count int
+	articleModel.Count(&count)
 	// 需要连表查询
-	return articleList, nil
+	return articleList, count, nil
 }
 
 /**

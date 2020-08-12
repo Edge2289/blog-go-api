@@ -17,11 +17,18 @@ const (
 
 	// database 数据库连接
 	DbType = "mysql"
-	DbHost = "39.106.158.255"
+	DbHost = "127.0.0.1"
 	DbPort = "3306"
-	DbDatabase = "blog_ refactoring"
+	DbDatabase = "blog_refactoring"
 	DbUserName = "root"
-	DbPassword = "xie19970326"
+	DbPassword = "root"
+
+	// 綫上數據庫
+	//DbHost = "39.106.158.255"
+	//DbPort = "3306"
+	//DbDatabase = "blog_ refactoring"
+	//DbUserName = "root"
+	//DbPassword = "xie19970326"
 
 	// RabbitMQ
 	MqHost = "10.10.107.36:15672" // 连接名

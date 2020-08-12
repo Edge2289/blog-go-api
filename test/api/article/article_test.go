@@ -18,14 +18,14 @@ type ArticleLabelTest struct {
 func TestArticleList(t *testing.T)  {
 
 	var article article.Article
-	article.CateId = 1
-	data, _ := article.GetSearchList(1, 1, 30)
+	//article.Title = "測試"
+	data, _ , _ := article.GetSearchList("1", 1, 30)
 	for _, v := range data  {
 		fmt.Println("-------------------")
 		fmt.Println(v)
 		fmt.Println("-------------------")
 	}
-	//fmt.Println(data)
+	fmt.Println(data)
 }
 
 /**
@@ -35,7 +35,7 @@ func TestArticleDetail(t *testing.T) {
 	var article article.Article
 	article.Id = 1
 	data, _ := article.GetArticleDetail()
-	fmt.Println(data.CommentsList)
+	fmt.Println(data)
 }
 
 /**

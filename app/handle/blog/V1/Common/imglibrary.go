@@ -26,7 +26,7 @@ func GetImgGroup(c *gin.Context) {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
 	}
-	utilGin.Success(http.StatusBadRequest, "", data)
+	utilGin.Success(http.StatusOK, "", data)
 }
 
 /**
