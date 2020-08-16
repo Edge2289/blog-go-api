@@ -19,7 +19,7 @@ const (
 	DbType = "mysql"
 	DbHost = "127.0.0.1"
 	DbPort = "3306"
-	DbDatabase = "blog_refactoring"
+	DbDatabase = "blog"  // blog_refactoring
 	DbUserName = "root"
 	DbPassword = "root"
 

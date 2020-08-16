@@ -4,6 +4,7 @@ import (
 	labelModel "blog-go-api/app/model/label"
 	labelService "blog-go-api/app/service/blog/v1/label"
 	"blog-go-api/utils/json"
+	"blog-go-api/utils/tools"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -87,14 +88,14 @@ func GetLabel(c *gin.Context) {
 	label.Label = c.Request.FormValue("label")
 	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
 
-	page,_ := strconv.Atoi(c.Request.FormValue("page"))
-	pageSize,_ := strconv.Atoi(c.Request.FormValue("pageSize"))
+	page := tools.GetPage(c)
+	pageSize := tools.GetPageSize(c)
 
-	data, err := labelService.GetLabel(label, page, pageSize);
+	data, count, err := labelService.GetLabel(label, page, pageSize);
 	utilGin := json.Gin{Ctx: c}
 	if err != nil{
 		utilGin.Fail(http.StatusBadRequest, "-1101", data)
 		return
 	}
-	utilGin.Success(http.StatusOK, "", data)
+	utilGin.PageOK(data, count, page, pageSize)
 }

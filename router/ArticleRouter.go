@@ -2,6 +2,7 @@ package router
 
 import (
 	"blog-go-api/app/handle/blog/V1/ArticleHandle"
+	"blog-go-api/app/handle/blog/V1/CateHandle"
 	"blog-go-api/app/handle/blog/V1/Label"
 	//"blog-go-api/app/middleware"
 )
@@ -26,16 +27,16 @@ func ArticleRouter(base string)  {
 	r.Use()
 	{
 		// 文章
-		r.GET("/", ArticleHandle.Get) // 获取文章
-		r.POST("/", ArticleHandle.Post)
-		r.DELETE("/", ArticleHandle.Delete)
-		r.PUT("/", ArticleHandle.Put)
+		r.GET("/list", ArticleHandle.Get) // 获取文章
+		r.POST("/add", ArticleHandle.Post)
+		r.DELETE("del", ArticleHandle.Delete)
+		r.PUT("/put", ArticleHandle.Put)
 
 		// 文章分类
-		r.GET("/cate", ArticleHandle.Get) // 获取文章
-		r.POST("/cate", ArticleHandle.Get)
-		r.DELETE("/cate", ArticleHandle.Get)
-		r.PUT("/cate", ArticleHandle.Get)
+		r.GET("/cate", CateHandle.Get) // 获取文章
+		r.POST("/cate", CateHandle.AddCategory)
+		r.DELETE("/cate", CateHandle.DelCategory)
+		r.PUT("/cate", CateHandle.UpdateCategory)
 
 		// 文章标签
 		r.GET("/label", Label.GetLabel) // 获取文章

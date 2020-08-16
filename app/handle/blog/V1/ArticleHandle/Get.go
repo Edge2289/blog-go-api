@@ -15,11 +15,6 @@ import (
 func Get(c *gin.Context) {
 
 	var article article.Article
-	//article.CateId = 1
-	//article.Title = 1
-	//article.Nick = 1
-	//article.IsState =
-
 	// 获取并且解析数据
 	//data, _ := ioutil.ReadAll(c.Request.Body)
 	//jsonc.Unmarshal(data, &article)
@@ -30,14 +25,8 @@ func Get(c *gin.Context) {
 	article.IsState, _ = tools.StringToInt(c.Query("is_state"))
 	label := c.Query("label_id")
 
-	page, _ := tools.StringToInt(c.Query("page"))
-	pageSize, _ := tools.StringToInt(c.Query("page_size"))
-	if page == 0 {
-		page = 1
-	}
-	if pageSize == 0 {
-		pageSize = 30
-	}
+	page := tools.GetPage(c)
+	pageSize := tools.GetPageSize(c)
 	reData, count, err := article.GetSearchList(label, page, pageSize)
 
 	/**

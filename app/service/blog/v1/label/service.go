@@ -34,15 +34,7 @@ func DelLabel(label labelModel.Label) (bool, error) {
 /**
 	查询
 */
-func GetLabel(label labelModel.Label, page, pageSize int) ([] labelModel.Label, error) {
-
-	if page == 0 {
-		page = 1
-	}
-	if pageSize == 0 {
-		pageSize = 30
-	}
-
-	labelData, error := label.GetLabel(page, pageSize)
-	return labelData, error
+func GetLabel(label labelModel.Label, page, pageSize int) ([] labelModel.Label, int, error) {
+	data, count, err := label.GetLabel(page, pageSize)
+	return data, count, err
 }

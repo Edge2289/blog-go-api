@@ -70,7 +70,7 @@ func (label Label) DelLabel() (bool, error) {
 /**
 	获取列表
  */
-func (label Label) GetLabel(page, pageSize int) ([]Label, error) {
+func (label Label) GetLabel(page, pageSize int) ([]Label, int, error) {
 
 	var labelData[] Label
 	labelModel := db.Eloquent.Model(&label)
@@ -81,9 +81,11 @@ func (label Label) GetLabel(page, pageSize int) ([]Label, error) {
 		labelModel = labelModel.Where("is_state = ?",label.IsState )
 	}
 
-	error :=labelModel.Offset((page-1) * pageSize).Limit(pageSize).Find(&labelData).Error
+	error := labelModel.Offset((page-1) * pageSize).Limit(pageSize).Find(&labelData).Error
 	if error != nil{
-		return labelData, error
+		return labelData, 0, error
 	}
-	return labelData, error
+	var count int
+	labelModel.Count(&count)
+	return labelData, count, error
 }
