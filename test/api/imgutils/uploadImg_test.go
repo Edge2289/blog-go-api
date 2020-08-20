@@ -15,6 +15,6 @@ func TestUploadImg(t *testing.T) {
 func TestStringStrstr(t *testing.T) {
 
 	str := "data:image/png;base64,XBodyContentX"
-	content := str[22: ]
+	content := str[22:]
 	fmt.Println(content)
 }

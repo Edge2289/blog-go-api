@@ -38,5 +38,5 @@ func GenerateCaptchaHandler(c *gin.Context) {
 	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "获取验证码失败", nil)
 	}
-	utilGin.Success(http.StatusOK, "",  map[string]interface{}{"data": b64s, "id": id})
+	utilGin.Success(http.StatusOK, "", map[string]interface{}{"data": b64s, "id": id})
 }

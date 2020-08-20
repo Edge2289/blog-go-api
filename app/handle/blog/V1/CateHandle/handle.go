@@ -11,7 +11,7 @@ import (
 
 func Get(c *gin.Context) {
 
-	var categoryModel  category.Category
+	var categoryModel category.Category
 
 	categoryModel.Id, _ = tools.StringToInt(c.Query("id"))
 	categoryModel.Name = c.Query("name")
@@ -30,11 +30,12 @@ func Get(c *gin.Context) {
 	}
 	utilGin.PageOK(reData, count, page, pageSize)
 }
+
 /**
 新增分類
 */
-func AddCategory(c *gin.Context)  {
-	var categoryModel  category.Category
+func AddCategory(c *gin.Context) {
+	var categoryModel category.Category
 
 	c.BindJSON(&categoryModel)
 	categoryModel.OperatorId = 1
@@ -45,7 +46,7 @@ func AddCategory(c *gin.Context)  {
 	常規返回
 	*/
 	utilGin := json.Gin{Ctx: c}
-	if err != nil || state != true{
+	if err != nil || state != true {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
 	}
@@ -53,10 +54,10 @@ func AddCategory(c *gin.Context)  {
 }
 
 /**
-	修改分類
+修改分類
 */
-func UpdateCategory(c *gin.Context)  {
-	var categoryModel  category.Category
+func UpdateCategory(c *gin.Context) {
+	var categoryModel category.Category
 
 	c.BindJSON(&categoryModel)
 	categoryModel.UpdateTime = time.GetDatabaseDate()
@@ -65,16 +66,16 @@ func UpdateCategory(c *gin.Context)  {
 	//常規返回
 	//*/
 	utilGin := json.Gin{Ctx: c}
-	if err != nil || state != true{
+	if err != nil || state != true {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
 	}
 	utilGin.Success(http.StatusOK, "", nil)
 }
 
-func DelCategory(c *gin.Context)  {
+func DelCategory(c *gin.Context) {
 
-	var categoryModel  category.Category
+	var categoryModel category.Category
 
 	utilGin := json.Gin{Ctx: c}
 	c.BindJSON(&categoryModel)
@@ -86,7 +87,7 @@ func DelCategory(c *gin.Context)  {
 	/**
 	常規返回
 	*/
-	if err != nil || state != true{
+	if err != nil || state != true {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
 	}

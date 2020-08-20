@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 )
+
 /**
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `title` varchar(50) DEFAULT NULL COMMENT '标题',
@@ -19,29 +20,28 @@ import (
   `read_num` int(11) DEFAULT '0' COMMENT '阅读数',
 */
 type Article struct {
-
-	Id       int `json:"id"`
+	Id           int    `json:"id"`
 	Title        string `gorm:"column:title;" json:"title"`
 	Describe     string `gorm:"column:describe;" json:"describe"`
-	Img        string `gorm:"column:img;" json:"img"`
-	Nick        string `gorm:"column:nick;" json:"nick"`
-	CateId        int `gorm:"column:cate_id;" json:"cate_id"`
-	Introduction        string `gorm:"column:introduction;" json:"introduction"`
-	IsComment        int `gorm:"column:is_comment;" json:"is_comment"`
-	IsState        int `gorm:"column:is_state;" json:"is_state"`
-	ClickNum        int `gorm:"column:click_num;" json:"click_num"`
-	ReadNum        int `gorm:"column:read_num;" json:"read_num"`
+	Img          string `gorm:"column:img;" json:"img"`
+	Nick         string `gorm:"column:nick;" json:"nick"`
+	CateId       int    `gorm:"column:cate_id;" json:"cate_id"`
+	Introduction string `gorm:"column:introduction;" json:"introduction"`
+	IsComment    int    `gorm:"column:is_comment;" json:"is_comment"`
+	IsState      int    `gorm:"column:is_state;" json:"is_state"`
+	ClickNum     int    `gorm:"column:click_num;" json:"click_num"`
+	ReadNum      int    `gorm:"column:read_num;" json:"read_num"`
 
-	OperatorId        int `gorm:"column:operator_id;"`
-	OperatorName        string `gorm:"column:operator_name;"`
+	OperatorId   int    `gorm:"column:operator_id;"`
+	OperatorName string `gorm:"column:operator_name;"`
 
-	CreateTime time.Time `json:"createTime" gorm:"column:created_at"`
-	UpdateTime time.Time `json:"updateTime" gorm:"column:updated_at"`
+	CreateTime time.Time  `json:"createTime" gorm:"column:created_at"`
+	UpdateTime time.Time  `json:"updateTime" gorm:"column:updated_at"`
 	DeleteTime *time.Time `json:"deleteTime" gorm:"column:deleted_at"`
 
 	/**
-		关联列表
-	 */
+	关联列表
+	*/
 	// 标签
 	LabelData []ArticleLabel `gorm:"foreignkey:ArticleId;AssociationForeignKey:ID" json:"label_data"`
 	// 点击量
@@ -53,11 +53,12 @@ type Article struct {
 }
 
 var db = dbModel.Eloquent
+
 /**
-	获取查询搜索的列表
-	可搜索参数：文章分类，文章类别，文章名称
-	按照创建时间排序
- */
+获取查询搜索的列表
+可搜索参数：文章分类，文章类别，文章名称
+按照创建时间排序
+*/
 func (article Article) GetSearchList(label string, page, pageSize int) ([]Article, int, error) {
 
 	var articleList []Article
@@ -70,10 +71,10 @@ func (article Article) GetSearchList(label string, page, pageSize int) ([]Articl
 		var articleLabelList []ArticleLabel
 		err := db.Model(&articleLabelList).Debug().Select("article_id").Where("label_id = ?", label).Find(&articleLabelList).Error
 		if err != nil {
-			return articleList, 0,err
+			return articleList, 0, err
 		}
 		var ids []interface{}
-		for _, v := range articleLabelList  {
+		for _, v := range articleLabelList {
 			ids = append(ids, v.ArticleId)
 		}
 		articleModel = articleModel.Where("id in (?) ", ids)
@@ -108,17 +109,17 @@ func (article Article) GetSearchList(label string, page, pageSize int) ([]Articl
 /**
 获取文章的明细
 	过来的是文章id
- */
-func (article Article) GetArticleDetail() (articleDetail Article, err error)  {
+*/
+func (article Article) GetArticleDetail() (articleDetail Article, err error) {
 
 	err = db.Model(&article).Preload("LabelData").Preload("ClickList").Preload("TextData").Preload("CommentsList").Where("id = ? and is_state = 1", article.Id).Find(&articleDetail).Error
 	return articleDetail, err
 }
 
 /**
-	新增文章
-	使用事务操作
- */
+新增文章
+使用事务操作
+*/
 func (article Article) AddArticleDetail() (bool, error) {
 
 	fmt.Println("-----------")
@@ -151,11 +152,9 @@ func (article Article) AddArticleDetail() (bool, error) {
 }
 
 /**
-	修改文章
- */
-
+修改文章
+*/
 
 /**
-	删除文章
- */
-
+删除文章
+*/

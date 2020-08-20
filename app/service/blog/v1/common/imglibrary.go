@@ -18,11 +18,10 @@ func DelImgs() {
 
 }
 
-
 /**
 获取图片分组
 */
-func GetImgGroup() (imgs[] imgsModel.ImgsCategory, err error) {
+func GetImgGroup() (imgs []imgsModel.ImgsCategory, err error) {
 
 	var img imgsModel.ImgsCategory
 

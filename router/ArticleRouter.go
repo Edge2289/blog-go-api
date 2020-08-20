@@ -12,8 +12,8 @@ import (
 		文章   /
 		文章分类  cate
 		文章标签  label
- */
-func ArticleRouter(base string)  {
+*/
+func ArticleRouter(base string) {
 
 	r := Routers.Group(apiRouter + "v1/" + base)
 
@@ -23,7 +23,7 @@ func ArticleRouter(base string)  {
 		前端请求数据加密对比
 
 	middleware.CheckJwt()
-	 */
+	*/
 	r.Use()
 	{
 		// 文章

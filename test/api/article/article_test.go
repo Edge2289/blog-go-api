@@ -12,18 +12,18 @@ import (
 
 type ArticleLabelTest struct {
 	ArticleId int
-	LabelId int
+	LabelId   int
 }
 
 /**
-	获取搜索文章列表
- */
-func TestArticleList(t *testing.T)  {
+获取搜索文章列表
+*/
+func TestArticleList(t *testing.T) {
 
 	var article article.Article
 	//article.Title = "測試"
-	data, _ , _ := article.GetSearchList("1", 1, 30)
-	for _, v := range data  {
+	data, _, _ := article.GetSearchList("1", 1, 30)
+	for _, v := range data {
 		fmt.Println("-------------------")
 		fmt.Println(v)
 		fmt.Println("-------------------")
@@ -32,8 +32,8 @@ func TestArticleList(t *testing.T)  {
 }
 
 /**
-	测试获取文档
- */
+测试获取文档
+*/
 func TestArticleDetail(t *testing.T) {
 	var article article.Article
 	article.Id = 1
@@ -42,11 +42,11 @@ func TestArticleDetail(t *testing.T) {
 }
 
 /**
-	新增文档
- */
+新增文档
+*/
 func TestAddArticleDetail(t *testing.T) {
 	var workResultLock sync.WaitGroup
-	for ii := 0; ii < 1000;  ii ++{
+	for ii := 0; ii < 1000; ii++ {
 		workResultLock.Add(1)
 		go addArticle()
 		fmt.Print("協程 開啓")
@@ -56,7 +56,7 @@ func TestAddArticleDetail(t *testing.T) {
 	fmt.Print("結束")
 }
 
-func addArticle()  {
+func addArticle() {
 
 	var articleText article.ArticleText
 	var articleBi article.Article
@@ -77,17 +77,17 @@ func addArticle()  {
 
 		// 明细
 		articleText.Text = "Textxxxx" + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000))
-		articleText.Markdown = "Markdownasdasda" + tools.IntToString(rand.Intn(1000000000000))+ tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000))
+		articleText.Markdown = "Markdownasdasda" + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000))
 
 		// 标签
 
 		label := []article.ArticleLabel{
-			article.ArticleLabel {
-				ArticleId: rand.Intn(100000),
-				LabelId: rand.Intn(100000),
-				OperatorId: rand.Intn(100000),
-				OperatorName: ""+ tools.IntToString(rand.Intn(100000)),
-				CreateTime: time.Now(),
+			article.ArticleLabel{
+				ArticleId:    rand.Intn(100000),
+				LabelId:      rand.Intn(100000),
+				OperatorId:   rand.Intn(100000),
+				OperatorName: "" + tools.IntToString(rand.Intn(100000)),
+				CreateTime:   time.Now(),
 			},
 		}
 
@@ -98,13 +98,14 @@ func addArticle()  {
 		fmt.Print(s)
 	}
 }
+
 /**
 
  */
-func TestAddLabel(t *testing.T)  {
+func TestAddLabel(t *testing.T) {
 
 	var workResultLock sync.WaitGroup
-	for ii := 0; ii < 1000;  ii ++{
+	for ii := 0; ii < 1000; ii++ {
 		workResultLock.Add(1)
 		//go addLabel()
 		fmt.Print("協程 開啓")
@@ -113,7 +114,7 @@ func TestAddLabel(t *testing.T)  {
 	workResultLock.Wait()
 	fmt.Print("結束")
 }
-func addLabel()  {
+func addLabel() {
 	//for i := 0; i < 10000;  i ++{
 	//	var label label.Label
 	//	label.Label =tools.IntToString(rand.Intn(15012)) + tools.IntToString(i)

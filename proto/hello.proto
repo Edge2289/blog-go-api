@@ -10,6 +10,21 @@ service Hello {
     rpc SayHello(HelloRequest) returns (HelloResponse) {}
 }
 
+// 定义Hello服务
+service Addition {
+    // 定义SayHello方法
+    rpc Addition(AdditionRequest) returns (AdditionResponse) {}
+}
+// AdditionResponse 响应结构
+message AdditionResponse {
+    int64 message = 1;
+}
+
+//AdditionResponse 请求结构
+message AdditionRequest {
+    int64 name = 1;
+}
+
 // HelloRequest 请求结构
 message HelloRequest {
     string name = 1;

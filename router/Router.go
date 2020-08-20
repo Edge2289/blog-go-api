@@ -27,7 +27,6 @@ func Run() *gin.Engine {
 	r.Use(middleware.Options)
 	r.Use(middleware.Secure)
 
-
 	fmt.Println("请求")
 	// 一些不需要登录 ， 鉴权的接口
 	// 这个是ping 返回
@@ -41,8 +40,8 @@ func Run() *gin.Engine {
 			"user": "谢谢",
 			"pwd":  "123456789",
 			"menu": map[string]interface{}{
-				"one" : 123123,
-				"two" : "123123",
+				"one": 123123,
+				"two": "123123",
 			},
 		}
 		utilGin.Success(200, "成功asdad", reData)
@@ -54,7 +53,7 @@ func Run() *gin.Engine {
 	//authMiddleware, _ := middleware.AuthInit()
 	//fmt.Print(authMiddleware)
 	CommonRouter()
-	AdminRouter("admin")  // 管理员
+	AdminRouter("admin") // 管理员
 	SystemRouter("system")
 	ArticleRouter("article") // 文章
 

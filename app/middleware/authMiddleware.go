@@ -41,21 +41,21 @@ func CheckJwt() gin.HandlerFunc {
 }
 
 /**
-	检查是否有权限访问接口
- */
+检查是否有权限访问接口
+*/
 func checkUserAuth(userData float64, apiPath string, apiMethod string) bool {
 	/**
-		提取jwt 里面的用户信息
-		有用户id  以及 用户角色
-	 */
+	提取jwt 里面的用户信息
+	有用户id  以及 用户角色
+	*/
 	// 先读redis里面的用户角色菜单
 
 	// 没有则直接生成数据库的角色菜单
 	adminMenuData, err := admin.GetAdminJwtMenu(int(userData))
-	if err != nil{
+	if err != nil {
 		return false
 	}
-	for _, v := range  adminMenuData {
+	for _, v := range adminMenuData {
 		if strings.ToUpper(v.ApiPath) == strings.ToUpper(apiPath) && strings.ToUpper(v.Method) == strings.ToUpper(apiMethod) {
 			return true
 		}

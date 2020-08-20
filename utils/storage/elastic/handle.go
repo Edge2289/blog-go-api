@@ -32,13 +32,13 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	_,_,err = client.Ping(host).Do(context.Background())
+	_, _, err = client.Ping(host).Do(context.Background())
 	if err != nil {
 		panic(err)
 	}
 	//fmt.Printf("Elasticsearch returned with code %d and version %s\n", code, info.Version.Number)
 
-	_,err = client.ElasticsearchVersion(host)
+	_, err = client.ElasticsearchVersion(host)
 	if err != nil {
 		panic(err)
 	}
@@ -91,7 +91,6 @@ func create() {
 
 }
 
-
 //查找
 func gets() {
 	//通过id查找
@@ -102,14 +101,15 @@ func gets() {
 	if get1.Found {
 		fmt.Printf("Got document %s in version %d from index %s, type %s\n", get1.Id, get1.Version, get1.Index, get1.Type)
 		var bb Employee
-		err:=json.Unmarshal(get1.Source,&bb)
-		if err!=nil{
+		err := json.Unmarshal(get1.Source, &bb)
+		if err != nil {
 			fmt.Println(err)
 		}
 		fmt.Println(bb.FirstName)
 		fmt.Println(string(get1.Source))
 	}
 }
+
 //
 //删除
 func delete() {
@@ -124,6 +124,7 @@ func delete() {
 	}
 	fmt.Printf("delete result %s\n", res.Result)
 }
+
 //
 //修改
 func update() {
@@ -139,6 +140,7 @@ func update() {
 	fmt.Printf("update age %s\n", res.Result)
 
 }
+
 //
 ////搜索
 func query() {
@@ -155,7 +157,6 @@ func query() {
 		println(err.Error())
 	}
 	printEmployee("字段相等", res, err)
-
 
 	//条件查询
 	//年龄大于30岁的
@@ -176,21 +177,23 @@ func query() {
 	printEmployee("分析", res, err)
 
 }
+
 //
 ////简单分页
-func list(size,page int) {
+func list(size, page int) {
 	if size < 0 || page < 1 {
 		fmt.Printf("param error")
 		return
 	}
-	res,err := client.Search("megacorp").
+	res, err := client.Search("megacorp").
 		Type("employee").
 		Size(size).
-		From((page-1)*size).
+		From((page - 1) * size).
 		Do(context.Background())
 	printEmployee("简单分页", res, err)
 
 }
+
 //
 //打印查询到的Employee
 func printEmployee(str string, res *elastic.SearchResult, err error) {

@@ -14,12 +14,12 @@ import (
 var (
 	accessKey = config.ACCESS_KEY // 七牛的accessKey 去七牛后台获取
 	secretKey = config.SECRET_KEY // 七牛的secretKey 去七牛后台获取
-	bucket    = config.BUCKET                                   // 上传空间 去七牛后台创建
+	bucket    = config.BUCKET     // 上传空间 去七牛后台创建
 )
 
 /**
-	上传七牛云的图片
- */
+上传七牛云的图片
+*/
 func Upload(imgData []byte) (string, error) {
 	// 鉴权
 	mac := qbox.NewMac(accessKey, secretKey)
@@ -40,7 +40,7 @@ func Upload(imgData []byte) (string, error) {
 	cfg.UseCdnDomains = false      //是否使用CDN上传加速
 
 	// 七牛key
-	newImgName := "blog/"+timeGet.GetDateDMY()+"/"+strconv.Itoa(int(time.Now().Unix()))+".png"
+	newImgName := "blog/" + timeGet.GetDateDMY() + "/" + strconv.Itoa(int(time.Now().Unix())) + ".png"
 
 	// 构建上传的对象
 	base64Uploader := storage.NewBase64Uploader(&cfg)
@@ -49,7 +49,7 @@ func Upload(imgData []byte) (string, error) {
 
 	// 图片base64格式的数据 注意 需要去掉 前面类似data:image/png;base64,的数据
 
-	imgData = imgData[22: ]
+	imgData = imgData[22:]
 	err := base64Uploader.Put(context.Background(), &ret, upToken, newImgName, imgData, nil)
 	if err != nil {
 		fmt.Println("上传文件失败,原因:", err)
@@ -60,8 +60,8 @@ func Upload(imgData []byte) (string, error) {
 }
 
 /**
- 删除七牛云的图片
- */
+删除七牛云的图片
+*/
 func DelImgs(imgName string) (bool, error) {
 
 	mac := qbox.NewMac(accessKey, secretKey)
@@ -71,7 +71,7 @@ func DelImgs(imgName string) (bool, error) {
 	}
 	// 指定空间所在的区域，如果不指定将自动探测
 	// 如果没有特殊需求，默认不需要指定
-	cfg.Zone=&storage.ZoneHuabei
+	cfg.Zone = &storage.ZoneHuabei
 	bucketManager := storage.NewBucketManager(mac, &cfg)
 	// 删除七牛云的图片
 	err := bucketManager.Delete(bucket, imgName)

@@ -31,7 +31,7 @@ func Get(c *gin.Context) {
 
 	/**
 	常規返回
-	 */
+	*/
 	utilGin := json.Gin{Ctx: c}
 	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
@@ -39,4 +39,3 @@ func Get(c *gin.Context) {
 	}
 	utilGin.PageOK(reData, count, page, pageSize)
 }
-

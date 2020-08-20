@@ -4,28 +4,29 @@ import (
 	dbModel "blog-go-api/app/model"
 	"time"
 )
+
 var db = dbModel.Eloquent
 
 // 定義分類的結構體
 type Category struct {
-	Id        int `gorm:"column:id;" json:"id"`
-	Name        string `gorm:"column:name;" json:"name"`
-	Note        string `gorm:"column:note;" json:"note"`
-	IsState        int `gorm:"column:is_state;" json:"is_state"`
-	Sort 		int`gorm:"column:sort;" json:"sort"`
-	IsHome 		int`gorm:"column:is_home;" json:"is_home"`
+	Id      int    `gorm:"column:id;" json:"id"`
+	Name    string `gorm:"column:name;" json:"name"`
+	Note    string `gorm:"column:note;" json:"note"`
+	IsState int    `gorm:"column:is_state;" json:"is_state"`
+	Sort    int    `gorm:"column:sort;" json:"sort"`
+	IsHome  int    `gorm:"column:is_home;" json:"is_home"`
 
-	OperatorId        int `gorm:"column:operator_id;"`
-	OperatorName        string `gorm:"column:operator_name;"`
+	OperatorId   int    `gorm:"column:operator_id;"`
+	OperatorName string `gorm:"column:operator_name;"`
 
-	CreateTime time.Time `json:"createTime" gorm:"column:created_at"`
-	UpdateTime time.Time `json:"updateTime" gorm:"column:updated_at"`
+	CreateTime time.Time  `json:"createTime" gorm:"column:created_at"`
+	UpdateTime time.Time  `json:"updateTime" gorm:"column:updated_at"`
 	DeleteTime *time.Time `json:"deleteTime" gorm:"column:deleted_at"`
 }
 
 /**
   獲取列表
- */
+*/
 func (category Category) GetList(page int, pageSize int) ([]Category, int, error) {
 	var categoryList []Category
 	categoryModel := db.Model(&categoryList)
@@ -51,8 +52,8 @@ func (category Category) GetList(page int, pageSize int) ([]Category, int, error
 }
 
 /**
-	新增
- */
+新增
+*/
 func (category Category) AddCategory() (bool, error) {
 
 	err := db.Model(&category).Create(&category).Error
@@ -81,7 +82,6 @@ func (category Category) UpdateCategory() (bool, error) {
 	}
 	return true, nil
 }
-
 
 /**
 刪除

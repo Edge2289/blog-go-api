@@ -22,7 +22,7 @@ func AddLabel(c *gin.Context) {
 
 	label.Label = c.Request.FormValue("label")
 	label.Color = c.Request.FormValue("color")
-	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
+	label.IsState, _ = strconv.Atoi(c.Request.FormValue("is_state"))
 	fmt.Println("------------------")
 	fmt.Println(label)
 	fmt.Println("------------------")
@@ -37,19 +37,19 @@ func AddLabel(c *gin.Context) {
 
 /**
 更新
- */
+*/
 func UpdateLabel(c *gin.Context) {
 
 	var label labelModel.Label
 	//data, _ := ioutil.ReadAll(c.Request.Body)
 	//jsonc.Unmarshal(data, &label)
 
-	label.Id,_ = strconv.Atoi(c.Request.FormValue("id"))
+	label.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
 	label.Label = c.Request.FormValue("label")
 	label.Color = c.Request.FormValue("color")
-	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
+	label.IsState, _ = strconv.Atoi(c.Request.FormValue("is_state"))
 
-	data, err := labelService.UpdateLabel(label);
+	data, err := labelService.UpdateLabel(label)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil || !data {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
@@ -60,15 +60,15 @@ func UpdateLabel(c *gin.Context) {
 
 /**
 删除
- */
+*/
 func DelLabel(c *gin.Context) {
 
 	var label labelModel.Label
 	//data, _ := ioutil.ReadAll(c.Request.Body)
 	//jsonc.Unmarshal(data, &label)
 
-	label.Id,_ = strconv.Atoi(c.Request.FormValue("id"))
-	data, err := labelService.DelLabel(label);
+	label.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
+	data, err := labelService.DelLabel(label)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil || !data {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
@@ -79,21 +79,21 @@ func DelLabel(c *gin.Context) {
 
 /**
 查询
- */
+*/
 func GetLabel(c *gin.Context) {
 	var label labelModel.Label
 	//data, _ := ioutil.ReadAll(c.Request.Body)
 	//jsonc.Unmarshal(data, &label)
 
 	label.Label = c.Request.FormValue("label")
-	label.IsState,_ = strconv.Atoi(c.Request.FormValue("is_state"))
+	label.IsState, _ = strconv.Atoi(c.Request.FormValue("is_state"))
 
 	page := tools.GetPage(c)
 	pageSize := tools.GetPageSize(c)
 
-	data, count, err := labelService.GetLabel(label, page, pageSize);
+	data, count, err := labelService.GetLabel(label, page, pageSize)
 	utilGin := json.Gin{Ctx: c}
-	if err != nil{
+	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "-1101", data)
 		return
 	}

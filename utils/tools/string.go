@@ -1,12 +1,12 @@
 package tools
 
 import (
-"encoding/json"
-"fmt"
-"github.com/gin-gonic/gin"
-"io/ioutil"
-"strconv"
-"time"
+	"encoding/json"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"strconv"
+	"time"
 )
 
 func StringToInt64(e string) (int64, error) {

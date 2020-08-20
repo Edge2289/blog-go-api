@@ -9,9 +9,9 @@ import (
 )
 
 //调用os.MkdirAll递归创建文件夹
-func createFile(filePath string)  error  {
+func createFile(filePath string) error {
 	if !isExist(filePath) {
-		err := os.MkdirAll(filePath,os.ModePerm)
+		err := os.MkdirAll(filePath, os.ModePerm)
 		return err
 	}
 	return nil
@@ -22,7 +22,7 @@ func createFile(filePath string)  error  {
  * 输入一个信息  以及文件名
  */
 func createAllFile(fileName string) error {
-	fileNameArr := strings.Split(fileName,"/")
+	fileNameArr := strings.Split(fileName, "/")
 	var fileStringName string = ""
 	for _, value := range fileNameArr {
 		if strings.Index(value, ".") != -1 {
@@ -32,7 +32,7 @@ func createAllFile(fileName string) error {
 				return err
 			}
 		} else {
-			fileStringName = fileStringName + value+"/"
+			fileStringName = fileStringName + value + "/"
 			_err := createFile(fileStringName)
 			if _err != nil {
 				return _err
@@ -44,7 +44,7 @@ func createAllFile(fileName string) error {
 
 // 判断所给路径文件/文件夹是否存在(返回true是存在)
 func isExist(path string) bool {
-	_, err := os.Stat(path)    //os.Stat获取文件信息
+	_, err := os.Stat(path) //os.Stat获取文件信息
 	if err != nil {
 		if os.IsExist(err) {
 			return true
@@ -55,11 +55,11 @@ func isExist(path string) bool {
 }
 
 /**
- 保存一个文件日志
- */
-func File(m map[string]interface{}, _dir string)  {
+保存一个文件日志
+*/
+func File(m map[string]interface{}, _dir string) {
 
-	_dir = _dir + "/" + time.GetDateDMY()+"/request-"+time.GetDateHours()+".log"
+	_dir = _dir + "/" + time.GetDateDMY() + "/request-" + time.GetDateHours() + ".log"
 	// 新建文件 或者是 目录
 	createAllFile(_dir)
 	// 写入文件 或者 新建文件夹

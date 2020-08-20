@@ -10,22 +10,22 @@ import (
 )
 
 /**
-	獲取列表
- */
-func TestCategoryList(t *testing.T)  {
+獲取列表
+*/
+func TestCategoryList(t *testing.T) {
 	var category category.Category
-	list, count , _ := category.GetList(1, 30)
+	list, count, _ := category.GetList(1, 30)
 	fmt.Print(count)
 	fmt.Print(list)
 }
 
 /**
-	新增
- */
-func TestAddCategory(t *testing.T)  {
+新增
+*/
+func TestAddCategory(t *testing.T) {
 
 	var workResultLock sync.WaitGroup
-	for ii := 0; ii < 1000;  ii ++{
+	for ii := 0; ii < 1000; ii++ {
 		workResultLock.Add(1)
 		go forAdd()
 		fmt.Print("協程 開啓")
@@ -34,10 +34,10 @@ func TestAddCategory(t *testing.T)  {
 	workResultLock.Wait()
 	fmt.Print("結束")
 }
-func forAdd()  {
+func forAdd() {
 	var category category.Category
 	for i := 0; i < 50000; i++ {
-		category.Name = "ce自行車自行車shi"+ tools.IntToString(i)
+		category.Name = "ce自行車自行車shi" + tools.IntToString(i)
 		category.IsState = 1
 		category.IsHome = 0
 		category.Note = "ceshi1 note" + tools.IntToString(i) + "啊擦撒十大大蘇打撒旦撒大蘇打實打實的阿斯頓撒旦"
@@ -51,7 +51,7 @@ func forAdd()  {
 	}
 }
 
-func TestUpdateCategory(y *testing.T)  {
+func TestUpdateCategory(y *testing.T) {
 
 	var category category.Category
 
@@ -62,7 +62,6 @@ func TestUpdateCategory(y *testing.T)  {
 	category.Sort = 60
 	category.Note = "ceshi1 note 啊擦撒十大大蘇打撒旦撒大蘇打實打實的阿斯頓撒旦"
 	category.UpdateTime = timeI.GetDatabaseDate()
-	state , _ := category.UpdateCategory()
+	state, _ := category.UpdateCategory()
 	fmt.Print(state)
 }
-

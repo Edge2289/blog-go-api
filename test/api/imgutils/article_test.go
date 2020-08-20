@@ -38,7 +38,7 @@ func TestUpdateArticle(t *testing.T) {
 }
 
 // 软删除图片分类
-func TestDelArticle(t *testing.T)  {
+func TestDelArticle(t *testing.T) {
 	var delImgs imgsModel.ImgsCategory
 	delImgs.Id = 4
 	delData, _ := delImgs.DelImsCategory()

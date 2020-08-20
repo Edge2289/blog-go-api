@@ -1,8 +1,8 @@
 package model
 
 import (
-	"fmt"
 	"blog-go-api/app/config"
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
@@ -10,6 +10,7 @@ import (
 )
 
 var Eloquent *gorm.DB
+
 // 基本模型的定义
 type Model struct {
 	Id        uint `gorm:"primary_key"`
@@ -24,7 +25,6 @@ func init() {
 		dbType, dbName, user, password, host, tablePrefix string
 	)
 	fmt.Println("数据库连接开始")
-
 
 	dbType = config.DbType
 	dbName = config.DbDatabase
@@ -54,11 +54,9 @@ func init() {
 	Eloquent.DB().SetMaxOpenConns(100)
 }
 
-
 func CloseDB() {
 	defer Eloquent.Close()
 }
-
 
 //func init(){
 //	db, err := gorm.Open("mysql", "root:123456@/sys?charset=utf8&parseTime=True&loc=Local")
@@ -66,8 +64,6 @@ func CloseDB() {
 //		fmt.Print(err)
 //	}
 //}
-
-
 
 // create 创建表
 //if !db.HasTable(&Like{}) {
@@ -130,9 +126,6 @@ func CloseDB() {
 //	}
 //}
 
-
-
-
 //like := &Like{}
 // 查询
 //var rows [] Like
@@ -140,7 +133,6 @@ func CloseDB() {
 //data.Scan(like)
 //fmt.Println(like)
 //fmt.Println(rows)
-
 
 //ret := res.Scan(&Like{})
 //if res.RecordNotFound() {
@@ -150,8 +142,6 @@ func CloseDB() {
 //	fmt.Print(res.Scan(&Like{}))
 //}
 //fmt.Print(res.Rows())
-
-
 
 //user := User{}
 //fmt.Print(user)

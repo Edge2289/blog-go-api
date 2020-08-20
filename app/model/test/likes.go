@@ -10,4 +10,3 @@ type Like struct {
 	Hash      uint64 `gorm:"unique_index:hash_idx;"`
 	CreatedAt time.Time
 }
-

@@ -10,9 +10,9 @@ import (
 )
 
 /**
- 新增管理员
- */
-func AddAdmin(c *gin.Context)  {
+新增管理员
+*/
+func AddAdmin(c *gin.Context) {
 	var admin AdminModel.Admin
 	//err := c.ShouldBind(&admin)
 	//pkg.AssertErr(err,"", c)
