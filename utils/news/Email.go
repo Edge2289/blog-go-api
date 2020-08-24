@@ -8,8 +8,8 @@ type Email struct {
 }
 
 /**
- 邮箱发送
- */
+邮箱发送
+*/
 func (e *Email) Push() {
 	fmt.Print("email Push")
 }

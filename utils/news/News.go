@@ -32,9 +32,10 @@ func (n *Ambient) Travel() (string, error) {
 	//}
 	return "error", errors.New("not News struct ")
 }
+
 /**
 获取需要使用的对象
- */
+*/
 //func GetStruct(_type string) (Type, string) {
 //
 //	switch _type {

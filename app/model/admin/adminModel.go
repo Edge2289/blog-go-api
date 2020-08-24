@@ -14,42 +14,41 @@ binding 代表着参数需要验证
 type LoginData struct {
 	Username string `form:"user_name" json:"user_name" binding:"required"`
 	Password string `form:"pwd" json:"pwd" binding:"required"`
-	Code string `form:"code" json:"code" binding:"required"`
-	UUID string `form:"uuid" json:"uuid" binding:"required"`
+	Code     string `form:"code" json:"code" binding:"required"`
+	UUID     string `form:"uuid" json:"uuid" binding:"required"`
 }
 
 /**
- 后台管理员模型
- */
+后台管理员模型
+*/
 type Admin struct {
-
-	Id    int `gorm:"column:id;primary_key"`
-	LoginName        string `gorm:"column:login_name;type:varchar(30);not null;index:admin_user_index"`
-	Name        string `gorm:"column:name;type:varchar(30);not null;"`
-	Password        string `gorm:"column:password;type:varchar(32);not null;"`
-	Sex        int `gorm:"column:sex;default:0;"`
+	Id           int    `gorm:"column:id;primary_key"`
+	LoginName    string `gorm:"column:login_name;type:varchar(30);not null;index:admin_user_index"`
+	Name         string `gorm:"column:name;type:varchar(30);not null;"`
+	Password     string `gorm:"column:password;type:varchar(32);not null;"`
+	Sex          int    `gorm:"column:sex;default:0;"`
 	Phone        string `gorm:"column:phone;type:varchar(11);"`
-	IsUsed        string `gorm:"column:is_used;default:1;"`
-	DepartmentId        int `gorm:"column:password;"`
-	OperatorId        int `gorm:"column:operator_id;"`
-	OperatorName        string `gorm:"column:operator_name;"`
+	IsUsed       string `gorm:"column:is_used;default:1;"`
+	DepartmentId int    `gorm:"column:password;"`
+	OperatorId   int    `gorm:"column:operator_id;"`
+	OperatorName string `gorm:"column:operator_name;"`
 
 	CreateTime string `json:"createTime" gorm:"column:created_at"`
 	UpdateTime string `json:"updateTime" gorm:"column:updated_at"`
 	DeleteTime string `json:"deleteTime" gorm:"column:deleted_at"`
 
 	RoleData []AdminRole `gprm:"foreignkey:UId;AssociationForeignKey:Id" json:"role_data"`
-	MenuData []Menu `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"menu_data"`
-	Token string
+	MenuData []Menu      `gorm:"foreignkey:LID;AssociationForeignKey:ID" json:"menu_data"`
+	Token    string
 }
 
 /**
- 登陆模块
- */
+登陆模块
+*/
 func (loginData *LoginData) LoginGetUserList() (Admin, error) {
 	var adminData Admin
 
-	pwdenty:= EncryptionPwd(loginData.Password)
+	pwdenty := EncryptionPwd(loginData.Password)
 
 	err := db.Eloquent.Model(&adminData).Where("login_name = ? and password = ?", loginData.Username, pwdenty).Where("deleted_at is NULL").First(&adminData).Error
 	if err != nil {
@@ -69,9 +68,9 @@ func (admin *Admin) Logout(token string) (status bool, err error) {
 }
 
 /**
- 获取管理云的全部账号
- filter  包含了搜索条件以及查询的页数
- */
+获取管理云的全部账号
+filter  包含了搜索条件以及查询的页数
+*/
 func (admin *Admin) GetAdminList(filter map[string]interface{}) (status bool, err error) {
 	//var adminList AdminModel
 	//db.Eloquent.Limit(100000).Find(&rows)
@@ -79,8 +78,8 @@ func (admin *Admin) GetAdminList(filter map[string]interface{}) (status bool, er
 }
 
 /**
- 新增管理员
- */
+新增管理员
+*/
 func (admin *Admin) AddAdminList() (bool, error) {
 
 	admin.Password = EncryptionPwd(admin.Password) // 密码加密
@@ -96,26 +95,26 @@ func (admin *Admin) AddAdminList() (bool, error) {
 }
 
 /**
- 编辑管理员数据
- */
-func (admin *Admin) EditAdminList (id int64) (update Admin, err error) {
+编辑管理员数据
+*/
+func (admin *Admin) EditAdminList(id int64) (update Admin, err error) {
 	return
 }
 
 /**
- 删除管理员 （软删除）
- */
-func (admin *Admin) DelAdminList (id int64) (success bool, err error) {
-	return  false, nil
+删除管理员 （软删除）
+*/
+func (admin *Admin) DelAdminList(id int64) (success bool, err error) {
+	return false, nil
 }
 
 /**
  加密管理云密码
 	md5(md5($pass).$salt);
- */
+*/
 func EncryptionPwd(pwd string) (p string) {
 
 	// 密匙
 	salt := config.AppSalt
-	return common.MD5(common.MD5(pwd)+salt)
+	return common.MD5(common.MD5(pwd) + salt)
 }

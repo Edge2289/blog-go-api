@@ -20,7 +20,6 @@ type UserLikesProfile struct {
 	UserID uint
 }
 
-
 func GetLikes(PageNum int, PageSize int) (likes Likes) {
 	//db.Offset(PageNum).Limit(PageSize).Find(&like)
 	Eloquent.First(&likes)
@@ -28,4 +27,3 @@ func GetLikes(PageNum int, PageSize int) (likes Likes) {
 	//db.Offset(PageNum).Limit(PageSize).Find(&like)
 	return
 }
-

@@ -23,5 +23,3 @@ func updateMenu() {
 func delMenu() {
 
 }
-
-

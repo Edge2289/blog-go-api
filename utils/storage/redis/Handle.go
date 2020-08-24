@@ -16,16 +16,16 @@ var personChan = make(chan Data, 1)
 var wg sync.WaitGroup
 
 type Data struct {
-	_type    string
-	name 	string
-	data    string
-	ex 	int
+	_type string
+	name  string
+	data  string
+	ex    int
 }
 
 /**
  * 获取缓存
  */
-func Get(name string)  {
+func Get(name string) {
 
 	//go Handle()
 	accessLogMap := make(map[string]interface{})
@@ -45,8 +45,8 @@ func Set(name string, data string) int {
 
 	go _Handle()
 	//return func() {
-		person := Data{"set", name, data, 0}
-		personChan <- person
+	person := Data{"set", name, data, 0}
+	personChan <- person
 	wg.Wait()
 	return 123213
 	//}
@@ -55,7 +55,7 @@ func Set(name string, data string) int {
 /**
  * 设置缓存  有时间限制
  */
-func SetEx(name string, data string, ex int)  {
+func SetEx(name string, data string, ex int) {
 	//go Handle()
 
 	//accessLogMap := make(map[string]interface{})
@@ -72,7 +72,7 @@ func SetEx(name string, data string, ex int)  {
 /**
  * 全局处理redis 的函数
  */
-func _Handle()  {
+func _Handle() {
 
 	//c, err := redis.Dial("tcp", "127.0.0.1:6379")
 	//if err != nil {
@@ -82,7 +82,7 @@ func _Handle()  {
 	//data := <- personChan
 	//fmt.Print(data)
 	//fmt.Print()
-	newPerson := <- personChan
+	newPerson := <-personChan
 	fmt.Printf("new person %s", newPerson._type)
 	defer wg.Add(-1)
 	//fmt.Print()

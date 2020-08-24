@@ -11,14 +11,13 @@ import (
 	"strconv"
 )
 
-
 /**
 获取图片分组
 */
 func GetImgGroup(c *gin.Context) {
 	/**
-		获取前端数据
-	 */
+	获取前端数据
+	*/
 	data, err := common.GetImgGroup()
 
 	utilGin := json.Gin{Ctx: c}
@@ -26,7 +25,7 @@ func GetImgGroup(c *gin.Context) {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
 	}
-	utilGin.Success(http.StatusBadRequest, "", data)
+	utilGin.Success(http.StatusOK, "", data)
 }
 
 /**
@@ -75,7 +74,6 @@ func UpdateImgGroup(c *gin.Context) {
 	}
 	utilGin.Fail(http.StatusBadRequest, "-1102", nil)
 }
-
 
 /**
 新增图片分组

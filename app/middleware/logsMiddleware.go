@@ -27,6 +27,7 @@ func (w bodyLogWriter) WriteString(s string) (int, error) {
 	w.body.WriteString(s)
 	return w.ResponseWriter.WriteString(s)
 }
+
 /**
 记录每一次请求的日志
 请求参数以及返回结果
@@ -72,7 +73,7 @@ func LogsRequestToFile() gin.HandlerFunc {
 		responseBody := bodyLogWriter.body.String()
 		res := jsonRequest.ResponseData{}
 		err := json.Unmarshal([]byte(responseBody), &res)
-		if err == nil{
+		if err == nil {
 			reponseData["code"] = res.Code
 			reponseData["Message"] = res.Message
 			reponseData["Data"] = res.Data
@@ -81,14 +82,14 @@ func LogsRequestToFile() gin.HandlerFunc {
 		//日志格式
 		accessLogMap := make(map[string]interface{})
 
-		accessLogMap["latencyTime"]      = latencyTime
-		accessLogMap["endTime"]      = endTime
-		accessLogMap["reqMethod"]      = reqMethod
-		accessLogMap["requestData"]      = requestData
-		accessLogMap["reponseData"]      =  responseBody
-		accessLogMap["reqUri"]      = reqUri
-		accessLogMap["statusCode"]      = statusCode
-		accessLogMap["clientIP"]      = clientIP
+		accessLogMap["latencyTime"] = latencyTime
+		accessLogMap["endTime"] = endTime
+		accessLogMap["reqMethod"] = reqMethod
+		accessLogMap["requestData"] = requestData
+		accessLogMap["reponseData"] = responseBody
+		accessLogMap["reqUri"] = reqUri
+		accessLogMap["statusCode"] = statusCode
+		accessLogMap["clientIP"] = clientIP
 
 		//accessLogJson, _ := json.Marshal(accessLogMap)
 
@@ -100,23 +101,24 @@ func LogsRequestToFile() gin.HandlerFunc {
 	}
 }
 
-func handleAccessChannel()  {
+func handleAccessChannel() {
 
 	for logData := range accessChannel {
-		log.Addlog(logData,config.LogDirName+"request")
+		log.Addlog(logData, config.LogDirName+"request")
 	}
 
 	/**
 	* 返回状态码不一样的时候执行
-	*/
+	 */
 	//for statusCode := range accessErrChannel  {
 	//	fmt.Println("error Code :", statusCode)
-		//pushEmail(statusCode)
+	//pushEmail(statusCode)
 	//}
 }
+
 /**
- 推送邮箱
- */
-func pushEmail(i int)  {
+推送邮箱
+*/
+func pushEmail(i int) {
 
 }

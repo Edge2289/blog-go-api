@@ -13,7 +13,6 @@ import (
 	"strconv"
 )
 
-
 /**
 上传图片
 */
@@ -48,10 +47,9 @@ func UploadImg(c *gin.Context) {
 	utilGin.Fail(http.StatusBadRequest, "-1103", nil)
 }
 
-
 /**
-	获取图片
- */
+获取图片
+*/
 func GetImg(c *gin.Context) {
 
 	var img imgsModel.Imgs
@@ -69,6 +67,7 @@ func GetImg(c *gin.Context) {
 	}
 	utilGin.Success(http.StatusOK, "", data)
 }
+
 /**
 删除图片
 */

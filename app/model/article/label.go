@@ -1,6 +1,5 @@
 package article
 
-
 import (
 	"time"
 )
@@ -9,18 +8,17 @@ import (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `aritcle_id` int(11) DEFAULT NULL COMMENT '文章id',
   `label_id` int(11) DEFAULT NULL COMMENT '标签id',
- */
+*/
 type ArticleLabel struct {
+	Id        int `json:"id"`
+	ArticleId int `gorm:"column:article_id;" json:"article_id"`
+	LabelId   int `gorm:"column:label_id;" json:"label_id"`
 
-	Id       int `json:"id"`
-	ArticleId        int `gorm:"column:article_id;" json:"article_id"`
-	LabelId        int `gorm:"column:label_id;" json:"label_id"`
+	OperatorId   int    `gorm:"column:operator_id;"`
+	OperatorName string `gorm:"column:operator_name;"`
 
-	OperatorId        int `gorm:"column:operator_id;"`
-	OperatorName        string `gorm:"column:operator_name;"`
-
-	CreateTime time.Time `json:"createTime" gorm:"column:created_at"`
-	UpdateTime time.Time `json:"updateTime" gorm:"column:updated_at"`
+	CreateTime time.Time  `json:"createTime" gorm:"column:created_at"`
+	UpdateTime time.Time  `json:"updateTime" gorm:"column:updated_at"`
 	DeleteTime *time.Time `json:"deleteTime" gorm:"column:deleted_at"`
 }
 
@@ -30,7 +28,7 @@ type ArticleLabel struct {
 func AddArticleLabel(articleLabel []ArticleLabel) (bool, error) {
 
 	// 循环插入标签
-	for _, v := range articleLabel  {
+	for _, v := range articleLabel {
 		err := db.Model(&v).Create(&v).Error
 		if err != nil {
 			return false, err
@@ -40,8 +38,8 @@ func AddArticleLabel(articleLabel []ArticleLabel) (bool, error) {
 }
 
 /**
-	更新标签
- */
+更新标签
+*/
 
 func UpdateArticleLabel(articleLabel []ArticleLabel, articleId int) (bool, error) {
 

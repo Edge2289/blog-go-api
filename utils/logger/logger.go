@@ -12,20 +12,20 @@ import (
 )
 
 /**
- 填写日志的入口
- */
+填写日志的入口
+*/
 func Addlog(m map[string]interface{}, _dir string) {
 	// 获取推送日志的驱动
 	dirveConfig := config.LogDrive
-	dirveConfigArr := strings.Split(dirveConfig,"/")
+	dirveConfigArr := strings.Split(dirveConfig, "/")
 
 	dirveInterface := map[string]interface{}{
-		"file" : logDrive.File,
-		"es" : logDrive.Es,
-		"mq" : logDrive.Mq,
+		"file": logDrive.File,
+		"es":   logDrive.Es,
+		"mq":   logDrive.Mq,
 	}
 	for _, v := range dirveConfigArr {
-		_, err := Call(dirveInterface, v,  m, _dir)
+		_, err := Call(dirveInterface, v, m, _dir)
 		if err != nil {
 			fmt.Println("method invoke error:", err)
 		}
@@ -34,8 +34,8 @@ func Addlog(m map[string]interface{}, _dir string) {
 }
 
 /**
- 反射执行函数
- */
+反射执行函数
+*/
 func Call(m map[string]interface{}, name string, params ...interface{}) ([]reflect.Value, error) {
 	f := reflect.ValueOf(m[name])
 	if len(params) != f.Type().NumIn() {
@@ -47,4 +47,3 @@ func Call(m map[string]interface{}, name string, params ...interface{}) ([]refle
 	}
 	return f.Call(in), nil
 }
-

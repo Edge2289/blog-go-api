@@ -13,23 +13,22 @@ import (
 //) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片库';
 
 type Imgs struct {
+	Id     int    `json:"id"`
+	Url    string `gorm:"column:url;" json:"url"`
+	CateId int    `gorm:"column:cate_id;" json:"cate_id"`
+	Domain string `gorm:"column:domain;" json:"domain"`
 
-	Id       int             `json:"id"`
-	Url        string `gorm:"column:url;" json:"url"`
-	CateId        int `gorm:"column:cate_id;" json:"cate_id"`
-	Domain        string `gorm:"column:domain;" json:"domain"`
+	OperatorId   int    `gorm:"column:operator_id;"`
+	OperatorName string `gorm:"column:operator_name;"`
 
-	OperatorId        int `gorm:"column:operator_id;"`
-	OperatorName        string `gorm:"column:operator_name;"`
-
-	CreateTime time.Time `json:"createTime" gorm:"column:created_at"`
-	UpdateTime time.Time `json:"updateTime" gorm:"column:updated_at"`
+	CreateTime time.Time  `json:"createTime" gorm:"column:created_at"`
+	UpdateTime time.Time  `json:"updateTime" gorm:"column:updated_at"`
 	DeleteTime *time.Time `json:"deleteTime" gorm:"column:deleted_at"`
 }
 
 /**
- 新增图片
- */
+新增图片
+*/
 func (imgs *Imgs) AddImg() (bool, error) {
 
 	err := db.Eloquent.Debug().Model(&imgs).Create(&imgs).Error
@@ -40,8 +39,8 @@ func (imgs *Imgs) AddImg() (bool, error) {
 }
 
 /**
-	删除如萍
- */
+删除如萍
+*/
 func (imgs *Imgs) DelImg() (bool, error) {
 
 	err := db.Eloquent.Model(&imgs).Where("id = ? ", imgs.Id).Delete(&imgs).Error
@@ -51,10 +50,9 @@ func (imgs *Imgs) DelImg() (bool, error) {
 	return true, nil
 }
 
-
 /**
- 	获取图片总数
- */
+获取图片总数
+*/
 
 func (imgs *Imgs) GetImgsCount() (int, error) {
 	var count int
@@ -71,10 +69,10 @@ func (imgs *Imgs) GetImgsCount() (int, error) {
 }
 
 /**
-	获取图片
- */
+获取图片
+*/
 func (imgs *Imgs) GetImgs(page, pageSize int) ([]Imgs, error) {
-	var imgsData[] Imgs
+	var imgsData []Imgs
 	dbModel := db.Eloquent.Model(&imgs)
 	if imgs.CateId != 0 {
 		dbModel = dbModel.Where("cate_id = ? ", imgs.CateId)

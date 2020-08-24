@@ -3,10 +3,11 @@ package adminValidators
 import (
 	"blog-go-api/app/model/admin"
 )
+
 /**
- 登陆的验证器
- */
-func LoginValidators(loginData admin.LoginData) string  {
+登陆的验证器
+*/
+func LoginValidators(loginData admin.LoginData) string {
 	// 用户名
 	if loginData.Username == "" || !(len(loginData.Username) > 0 && len(loginData.Username) < 20) {
 		return "-10004"

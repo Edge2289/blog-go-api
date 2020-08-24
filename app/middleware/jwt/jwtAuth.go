@@ -12,7 +12,7 @@ import (
 )
 
 type User struct {
-	uid int
+	uid  int
 	role interface{}
 }
 
@@ -20,27 +20,27 @@ type User struct {
  生成token
 userData
 map[string]interface{}
- */
+*/
 func GetJwtTokenMiddleware(uid int) (string, error) {
 
 	token := jwt.New(jwt.SigningMethodHS256)
 	/**
-		Audience:  "Username",        // 受众
-		ExpiresAt: expiresTime,       // 失效时间
-		Id:        "123123",          // 编号
-		IssuedAt:  time.Now().Unix(), // 签发时间
-		Issuer:    "gin hello",       // 签发人
-		NotBefore: time.Now().Unix(), // 生效时间
-		Subject:   "login",           // 主题
+	Audience:  "Username",        // 受众
+	ExpiresAt: expiresTime,       // 失效时间
+	Id:        "123123",          // 编号
+	IssuedAt:  time.Now().Unix(), // 签发时间
+	Issuer:    "gin hello",       // 签发人
+	NotBefore: time.Now().Unix(), // 生效时间
+	Subject:   "login",           // 主题
 	*/
 	claims := make(jwt.MapClaims)
-	claims["aud"] = config.AppName // 受众
-	claims["exp"] = time.Now().Add(time.Hour ).Unix() // 失效时间 设置超时时间 一分钟 * time.Duration(1)
-	claims["iat"] = time.Now().Unix() // 签发时间
-	claims["iss"] = config.AppName // 签发人
-	claims["nbf"] = time.Now().Unix() // 生效时间
-	claims["sub"] = "go-api-sub" // 主题
-	claims["id"] = "admin id" // userData["uid"]
+	claims["aud"] = config.AppName                   // 受众
+	claims["exp"] = time.Now().Add(time.Hour).Unix() // 失效时间 设置超时时间 一分钟 * time.Duration(1)
+	claims["iat"] = time.Now().Unix()                // 签发时间
+	claims["iss"] = config.AppName                   // 签发人
+	claims["nbf"] = time.Now().Unix()                // 生效时间
+	claims["sub"] = "go-api-sub"                     // 主题
+	claims["id"] = "admin id"                        // userData["uid"]
 
 	// 存储所需要的内容
 	claims["uid"] = uid
@@ -72,18 +72,18 @@ func JwtParseUser(c *gin.Context) (interface{}, error) {
 	token, err := RefaceJwtToken(claims)
 	if err == nil {
 		// 设置token header 头
-		c.Header("Authorization", "Bearer " + token)
+		c.Header("Authorization", "Bearer "+token)
 	}
 	return claims["uid"], nil
 }
 
 /**
   刷新token
- */
+*/
 func RefaceJwtToken(claims jwt.MapClaims) (string, error) {
 
 	newToken := jwt.New(jwt.SigningMethodHS256)
-	claims["exp"] = time.Now().Add(time.Hour ).Unix() // 失效时间 设置超时时间 一分钟 * time.Duration(1)
+	claims["exp"] = time.Now().Add(time.Hour).Unix() // 失效时间 设置超时时间 一分钟 * time.Duration(1)
 	// 存储所需要的内容
 	newToken.Claims = claims
 	if tokenString, err := newToken.SignedString([]byte(config.JwtSecretKey)); err == nil {
@@ -95,8 +95,8 @@ func RefaceJwtToken(claims jwt.MapClaims) (string, error) {
 
 /**
   获取token
- */
-func ExtractToken(c *gin.Context) ( string, string) {
+*/
+func ExtractToken(c *gin.Context) (string, string) {
 	authHeader := c.Request.Header.Get("Authorization")
 
 	if authHeader == "" {
@@ -106,7 +106,7 @@ func ExtractToken(c *gin.Context) ( string, string) {
 	parts := strings.SplitN(authHeader, " ", 2)
 	fmt.Println(parts)
 	if !(len(parts) == 2 && parts[0] == "Bearer") {
-		return parts[1],  "-1001"
+		return parts[1], "-1001"
 	}
 	return parts[1], ""
 }
@@ -124,12 +124,12 @@ func GetIdFromClaims(key string, claims jwt.Claims) string {
 	}
 	return ""
 }
+
 // 示例 ：GetIdFromClaims("username", token.claims) 其中token是已经解密的token
 
-
 /**
- 获取参数里面的值
- */
+获取参数里面的值
+*/
 // 示例 ：GetIdFromClaims("username", token.claims) 其中token是已经解密的token   UserParam
 //func GetIdFromClaims(key string, claims jwt.Claims) (interface{}) {
 //	var userParam = UserParam
