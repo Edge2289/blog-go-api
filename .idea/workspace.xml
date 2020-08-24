@@ -2,77 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5f1cf5e-8a8f-4675-aa1b-d7f7a9e42b99" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Admin/AdminHandle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Admin/AdminHandle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Admin/DeptHandle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Admin/DeptHandle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Admin/LoginHandle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Admin/LoginHandle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Delete.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Delete.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Get.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Get.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Post.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Post.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Put.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/ArticleHandle/Put.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Common/access.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Common/access.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Common/captcha.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Common/captcha.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Common/imglibrary.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Common/imglibrary.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Common/uploadimg.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Common/uploadimg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/Label/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/Label/handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/handle/blog/V1/SystemHandle/menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/handle/blog/V1/SystemHandle/menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/apiMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/authMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/authMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/headerMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/headerMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/jwt/jwtAuth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/middleware/logsMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/middleware/logsMiddleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/admin/adminModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/adminModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/admin/menuModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/menuModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/admin/roleModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/admin/roleModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/article/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/article/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/article/click.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/article/click.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/article/comments.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/article/comments.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/article/label.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/article/label.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/article/text.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/article/text.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/imgs/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/imgs/handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/imgs/img.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/imgs/img.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/label/label.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/label/label.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/like.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/like.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/system/configModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/system/configModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/test/likes.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/test/likes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/user/userModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/user/userModel.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/blog/v1/admin/menuservice.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/blog/v1/admin/menuservice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/blog/v1/common/imglibrary.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/blog/v1/common/imglibrary.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/blog/v1/label/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/common/qiniu/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/common/qiniu/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/validators/adminValidators/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/validators/adminValidators/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/md5.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/md5.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/cn/cn.go" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/cn/cn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/en.go" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/en.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/AdminRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/AdminRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/ArticleRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/ArticleRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/Common.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/Router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/Router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/SystemRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/SystemRouter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/api/article/article_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/api/article/article_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/api/imgutils/article_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/api/imgutils/article_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/api/imgutils/uploadImg_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/api/imgutils/uploadImg_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/json/Success.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/json/Success.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logger/drive/LoggerToES.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger/drive/LoggerToES.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logger/drive/LoggerToFile.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger/drive/LoggerToFile.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logger/drive/LoggerToMQ.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger/drive/LoggerToMQ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logger/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logger/logger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/news/Email.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/news/Email.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/news/News.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/news/News.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/news/Sms.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/news/Sms.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/pkg/func.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pkg/func.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/pkg/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pkg/utils.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/qrcode/create.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/qrcode/create.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/storage/elastic/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/storage/elastic/handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/storage/qiniu/handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/storage/qiniu/handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/storage/redis/Handle.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/storage/redis/Handle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/time/time.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/time/time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/go_build_main_go.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,13 +28,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
-    <property name="settings.editor.selected.configurable" value="goland.project.structure" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -115,13 +50,13 @@
       <screen x="0" y="23" width="1440" height="814" />
     </state>
     <state x="320" y="96" key="#Go_Modules_(vgo)/0.23.1440.814@0.23.1440.814" timestamp="1597990243158" />
-    <state x="184" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597990289640">
+    <state x="184" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598235181454">
       <screen x="0" y="23" width="1440" height="814" />
     </state>
-    <state x="184" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.814@0.23.1440.814" timestamp="1597990289640" />
-    <state x="229" y="70" key="SettingsEditor" timestamp="1598235019767">
+    <state x="184" y="93" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.814@0.23.1440.814" timestamp="1598235181454" />
+    <state x="229" y="70" key="SettingsEditor" timestamp="1598235260642">
       <screen x="0" y="23" width="1440" height="814" />
     </state>
-    <state x="229" y="70" key="SettingsEditor/0.23.1440.814@0.23.1440.814" timestamp="1598235019767" />
+    <state x="229" y="70" key="SettingsEditor/0.23.1440.814@0.23.1440.814" timestamp="1598235260642" />
   </component>
 </project>
