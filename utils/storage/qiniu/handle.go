@@ -12,9 +12,9 @@ import (
 )
 
 var (
-	accessKey = config.ACCESS_KEY // 七牛的accessKey 去七牛后台获取
-	secretKey = config.SECRET_KEY // 七牛的secretKey 去七牛后台获取
-	bucket    = config.BUCKET     // 上传空间 去七牛后台创建
+	accessKey = config.AccessKey // 七牛的accessKey 去七牛后台获取
+	secretKey = config.SecretKey // 七牛的secretKey 去七牛后台获取
+	bucket    = config.BUCKET    // 上传空间 去七牛后台创建
 )
 
 /**

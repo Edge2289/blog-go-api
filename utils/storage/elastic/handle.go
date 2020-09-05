@@ -1,6 +1,8 @@
 package elastic
 
 import (
+	"blog-go-api/app/config"
+	"blog-go-api/utils/tools"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -9,7 +11,10 @@ import (
 )
 
 var client *elastic.Client
-var host = "http://139.9.38.4:9200/"
+var host = config.EsHost
+var index = config.EsIndex
+var _type = config.EsType
+
 
 type Employee struct {
 	FirstName string   `json:"first_name"`
@@ -17,6 +22,10 @@ type Employee struct {
 	Age       int      `json:"age"`
 	About     string   `json:"about"`
 	Interests []string `json:"interests"`
+}
+
+type Reuqest struct {
+
 }
 
 //初始化
@@ -36,15 +45,29 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	//fmt.Printf("Elasticsearch returned with code %d and version %s\n", code, info.Version.Number)
-
-	_, err = client.ElasticsearchVersion(host)
-	if err != nil {
-		panic(err)
-	}
-	//fmt.Printf("Elasticsearch version %s\n", esversion)
-
 }
+
+// 自做 公共新增
+func Insert(autoId int, esString interface{}) (bool, error)  {
+
+	_, err := client.Index().
+		Index(index).
+		Type(_type).
+		Id(tools.IntToString(autoId)).
+		BodyJson(esString).
+		Do(context.Background())
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+
+
+
+
+
+
 
 /*下面是简单的CURD*/
 
@@ -65,7 +88,7 @@ func create() {
 	fmt.Printf("Indexed tweet %s to index s%s, type %s\n", put1.Id, put1.Index, put1.Type)
 
 	//使用字符串
-	e2 := `{"first_name":"John","last_name":"Smith","age":25,"about":"I love to go rock climbing","interests":["sports","music"]}`
+	e2 := `{"first_name":"John","last_name":"Smith","age":25,"about":"I ove to go rock climbing","interests":["sports","music"]}`
 	put2, err := client.Index().
 		Index("megacorp").
 		Type("employee").
@@ -106,6 +129,7 @@ func gets() {
 			fmt.Println(err)
 		}
 		fmt.Println(bb.FirstName)
+		fmt.Println(bb)
 		fmt.Println(string(get1.Source))
 	}
 }
@@ -210,10 +234,10 @@ func printEmployee(str string, res *elastic.SearchResult, err error) {
 }
 
 func run() {
-	// create()
-	// delete()
-	// update()
-	// gets()
-	query()
-	// list(2,1)
+	create()
+	//delete()
+	//update()
+	//gets()
+	//query()
+	//list(2,1)
 }
