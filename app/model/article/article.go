@@ -96,7 +96,7 @@ func (article Article) GetSearchList(label string, page, pageSize int) ([]Articl
 		articleModel = articleModel.Where("is_state = ?", article.IsState)
 	}
 
-	err := articleModel.Preload("LabelData").Offset((page - 1) * pageSize).Limit(pageSize).Find(&articleList).Error
+	err := articleModel.Preload("LabelData").Offset((page - 1) * pageSize).Limit(pageSize).Order("id DESC").Find(&articleList).Error
 	if err != nil {
 		return articleList, 0, err
 	}
