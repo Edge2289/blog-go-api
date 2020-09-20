@@ -4,6 +4,8 @@ import (
 	"blog-go-api/app/handle/blog/V1/ArticleHandle"
 	"blog-go-api/app/handle/blog/V1/CateHandle"
 	"blog-go-api/app/handle/blog/V1/Label"
+	jwtAuth "blog-go-api/app/middleware"
+
 	//"blog-go-api/app/middleware"
 )
 
@@ -15,16 +17,13 @@ import (
 */
 func ArticleRouter(base string) {
 
-	r := Routers.Group(apiRouter + "v1/" + base)
-
 	/**
-		检查请求权限   以及JWT
-		下次JWT 和  检查Auth 拆分出来
-		前端请求数据加密对比
-
-	middleware.CheckJwt()
+	需要鉴权的
 	*/
-	r.Use()
+	RoutersAuth := Routers.Group(apiRouter + "v1")
+	RoutersAuth.Use(jwtAuth.CheckJwt())
+
+	r := RoutersAuth.Group("/" +base)
 	{
 		// 文章
 		r.GET("/list", ArticleHandle.Get) // 获取文章

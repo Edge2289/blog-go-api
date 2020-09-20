@@ -3,14 +3,13 @@ package Admin
 import (
 	"blog-go-api/app/middleware/jwt"
 	"blog-go-api/app/model/admin"
+	"blog-go-api/utils/json"
+	"fmt"
 
 	"blog-go-api/app/validators/adminValidators"
-	"blog-go-api/utils/json"
 	"blog-go-api/utils/pkg"
-	jsonc "encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -22,16 +21,15 @@ var store = base64Captcha.DefaultMemStore
 */
 func Login(c *gin.Context) {
 	var loginVals admin.LoginData
-	utilGin := json.Gin{Ctx: c}
 	//var jwtData = make(map[string]interface{})
 	// 获取并且解析数据
-	data, _ := ioutil.ReadAll(c.Request.Body)
-	jsonc.Unmarshal(data, &loginVals)
+	_ = c.BindJSON(&loginVals)
+	fmt.Println("loginVals")
+	fmt.Println(loginVals)
 
 	if vErr := adminValidators.LoginValidators(loginVals); vErr != "" {
 		pkg.AssertCode(http.StatusBadRequest, vErr, c)
 	}
-
 	//获取参数
 	//loginVals.Username = c.Request.FormValue("user_name")
 	//loginVals.Password = c.Request.FormValue("pwd")
@@ -54,6 +52,7 @@ func Login(c *gin.Context) {
 	token, err := jwt.GetJwtTokenMiddleware(adminData.Id)
 	pkg.AssertErr(err, "-10003", c)
 
+	utilGin := json.Gin{Ctx: c}
 	// 设置token header 头
 	c.Header("Access-Control-Expose-Headers", "Authorization")
 	c.Header("Authorization", "Bearer "+token)

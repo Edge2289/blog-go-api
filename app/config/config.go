@@ -39,7 +39,7 @@ const (
 	AccessKey = "Q0zPp-M3h3Ct5-p5IFCmAmyX89ZpvQbu-DVb1dmM"
 	SecretKey = "dzbhcSBBF0PnilMcMDVKz-ykLAxP5jkP0tRyKXJV"
 	BUCKET    = "treenblogimg" // 存储的空间名称
-	ImgDomain = "http://q9onx63t3.bkt.clouddn.com/"
+	ImgDomain = "http://qiniuyunoss.uikiss.cn/"
 
 	// es
 	EsHost  = "http://192.168.174.131:9200/" // "http://139.9.38.4:9200/"

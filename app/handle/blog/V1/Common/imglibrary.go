@@ -8,7 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 	//"io/ioutil"
 	"net/http"
-	"strconv"
 )
 
 /**
@@ -34,10 +33,7 @@ func GetImgGroup(c *gin.Context) {
 func DelImgGroup(c *gin.Context) {
 
 	var img imgs.ImgsCategory
-	//data, _ := ioutil.ReadAll(c.Request.Body)
-	//jsonc.Unmarshal(data, &img)
-
-	img.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
+	_ = c.BindJSON(&img)
 	bool, _ := common.DelImgGroup(img)
 
 	utilGin := json.Gin{Ctx: c}
@@ -54,12 +50,7 @@ func DelImgGroup(c *gin.Context) {
 func UpdateImgGroup(c *gin.Context) {
 
 	var img imgs.ImgsCategory
-	//data, _ := ioutil.ReadAll(c.Request.Body)
-	//jsonc.Unmarshal(data, &img)
-
-	img.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
-	img.Name = c.Request.FormValue("name")
-	img.Sort, _ = strconv.Atoi(c.Request.FormValue("sort"))
+	_ = c.BindJSON(&img)
 
 	bool, err := common.UpdateImgGroup(img)
 	utilGin := json.Gin{Ctx: c}
@@ -81,10 +72,7 @@ func UpdateImgGroup(c *gin.Context) {
 func AddImgGroup(c *gin.Context) {
 
 	var img imgs.ImgsCategory
-	//data, _ := ioutil.ReadAll(c.Request.Body)
-	//jsonc.Unmarshal(data, &img)
-	img.Name = c.Request.FormValue("name")
-	img.Sort, _ = strconv.Atoi(c.Request.FormValue("sort"))
+	_ = c.BindJSON(&img)
 
 	bool, err := common.AddImgGroup(img)
 

@@ -1,10 +1,18 @@
 package imgutils
 
 import (
+	imgsModel "blog-go-api/app/model/imgs"
 	uploadimg "blog-go-api/utils/storage/qiniu"
 	"fmt"
 	"testing"
 )
+
+func TestUpdateImsCategory(t *testing.T)  {
+	var imgModel imgsModel.Imgs
+	imgModel.CateId = 10
+	_, _ = imgModel.UpdateImsCategory("13,14")
+	fmt.Println("success")
+}
 
 func TestUploadImg(t *testing.T) {
 

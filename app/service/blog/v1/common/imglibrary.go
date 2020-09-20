@@ -38,13 +38,7 @@ func GetImgGroup() (imgs []imgsModel.ImgsCategory, err error) {
 func DelImgGroup(delImg imgsModel.ImgsCategory) (bool, error) {
 
 	bool, err := delImg.DelImsCategory()
-	if err != nil {
-		return false, err
-	}
-	if bool {
-		return true, nil
-	}
-	return false, nil
+	return bool, err
 }
 
 /**
@@ -68,12 +62,5 @@ func UpdateImgGroup(updateImgs imgsModel.ImgsCategory) (bool, error) {
 func AddImgGroup(addImg imgsModel.ImgsCategory) (bool, error) {
 
 	data, err := addImg.AddImsCategory()
-
-	if err != nil {
-		return false, err
-	}
-	if data {
-		return true, nil
-	}
-	return false, nil
+	return data, err
 }

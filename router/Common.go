@@ -2,17 +2,19 @@ package router
 
 import (
 	"blog-go-api/app/handle/blog/V1/Common"
-	"blog-go-api/app/middleware"
 	jwtAuth "blog-go-api/app/middleware"
-	"fmt"
 )
 
 /**
 公共不需要鉴权接口
 */
 func CommonRouter() {
+	/**
+		需要鉴权的
+	 */
+	RoutersAuth := Routers.Group(apiRouter + "v1")
+	RoutersAuth.Use(jwtAuth.CheckJwt())
 
-	fmt.Print("登陆入口加载")
 	// 这里都是一些不需要登录的接口
 	r := Routers.Group(apiRouter + "v1")
 	{
@@ -26,24 +28,23 @@ func CommonRouter() {
 		// 添加访问日志
 		r.GET("/addAccess", Common.AddAccess)
 	}
-
 	r.Group(apiRouter + "v1")
 	{
 		// 上传图片
-		r.GET("/uploadImg", Common.GetImg)
-		r.POST("/uploadImg", Common.UploadImg)
-		r.DELETE("/uploadImg", Common.DelImg)
-		r.PUT("/uploadImg", Common.MvImgCategory)
+		RoutersAuth.GET("/uploadImg", Common.GetImg)
+		RoutersAuth.POST("/uploadImg", Common.UploadImg)
+		RoutersAuth.DELETE("/uploadImg", Common.DelImg)
+		RoutersAuth.PUT("/uploadImg", Common.MvImgCategory)
 
 		// 图片分组管理
-		r.GET("/imgGroup", Common.GetImgGroup)
-		r.DELETE("/imgGroup", Common.DelImgGroup)
-		r.PUT("/imgGroup", Common.UpdateImgGroup)
-		r.POST("/imgGroup", Common.AddImgGroup)
+		RoutersAuth.GET("/imgGroup", Common.GetImgGroup)
+		RoutersAuth.DELETE("/imgGroup", Common.DelImgGroup)
+		RoutersAuth.PUT("/imgGroup", Common.UpdateImgGroup)
+		RoutersAuth.POST("/imgGroup", Common.AddImgGroup)
 	}
 
 	// 公共接口加载
-	r.Group(apiRouter + "v1").Use(middleware.CheckJwt())
+	r.Group(apiRouter + "v1")
 	{
 		// 上传图片
 		//r.POST("/uploadImgs", Common.Upload)

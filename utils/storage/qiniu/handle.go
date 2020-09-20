@@ -3,12 +3,13 @@ package qiniu
 import (
 	"blog-go-api/app/config"
 	timeGet "blog-go-api/utils/time"
+	"strconv"
+	"time"
+
 	"context"
 	"fmt"
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/storage"
-	"strconv"
-	"time"
 )
 
 var (
@@ -47,9 +48,10 @@ func Upload(imgData []byte) (string, error) {
 	fmt.Println(base64Uploader)
 	ret := storage.PutRet{}
 
-	// 图片base64格式的数据 注意 需要去掉 前面类似data:image/png;base64,的数据
+	//图片base64格式的数据 注意 需要去掉 前面类似data:image/png;base64,的数据
 
-	imgData = imgData[22:]
+	imgData = imgData[23:]
+	fmt.Println(imgData)
 	err := base64Uploader.Put(context.Background(), &ret, upToken, newImgName, imgData, nil)
 	if err != nil {
 		fmt.Println("上传文件失败,原因:", err)
