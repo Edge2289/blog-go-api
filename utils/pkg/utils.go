@@ -31,6 +31,10 @@ func AssertErr(err error, msg string, c *gin.Context) {
 		if msg == "" {
 			msg = err.Error()
 		}
+		if msg == "-1003" {
+			// 重新登录
+			statusCode = 401
+		}
 		utilGin := json.Gin{Ctx: c}
 		utilGin.Success(statusCode, msg, nil)
 		c.Abort()

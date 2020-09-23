@@ -29,12 +29,12 @@ func CheckJwt() gin.HandlerFunc {
 			pkg.AssertCode(http.StatusBadRequest, "-1003", c)
 		}
 
-		userData, err := jwt.JwtParseUser(c)
+		_, err := jwt.JwtParseUser(c)
 		pkg.AssertErr(err, "-1003", c)
 
 		// userData  拿出role 去验证是否有该接口权限
-		auth := checkUserAuth(userData.(float64), c.Request.URL.Path, c.Request.Method)
-		pkg.Assert(auth, "-1004", c)
+		//auth := checkUserAuth(userData.(float64), c.Request.URL.Path, c.Request.Method)
+		//pkg.Assert(auth, "-1004", c)
 		// parts[1]是获取到的tokenString，我们使用之前定义好的解析JWT的函数来解析它
 		// 将当前请求的username信息保存到请求的上下文c上
 		c.Next() // 后续的处理函数可以用过c.Get("username")来获取当前请求的用户信息

@@ -117,6 +117,7 @@ func Put(c *gin.Context) {
 	var articleDetails article.Article
 	_ = c.BindJSON(&updateArticle)
 
+	articleDetails.Id = updateArticle.Id
 	articleDetails.Title = updateArticle.Title
 	articleDetails.Describe = updateArticle.Describe
 	articleDetails.Img = updateArticle.Img
@@ -136,6 +137,7 @@ func Put(c *gin.Context) {
 
 	for _, id := range updateArticle.LabelData {
 		labelData = append(labelData, article.ArticleLabel{
+			ArticleId: articleDetails.Id,
 			LabelId: id,
 			OperatorId: 1,
 			OperatorName: "系统",

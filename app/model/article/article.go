@@ -145,16 +145,43 @@ func (article Article) UpdateArticleDetail() (bool, error) {
 	TextData["text"] = article.TextData.Text
 	TextData["markdown"] = article.TextData.Markdown
 
-	db.Begin()
-	err := db.Model(Article{}).Where("id = ?", article.Id).Update(data).Error
-	err1 := db.Model(ArticleText{}).Where("article_id = ?", article.Id).Update(TextData).Error
-	err2 := db.Where("article_id = ?", article.Id).Delete(&ArticleLabel{}).Error
-	err3 := db.Model(ArticleLabel{}).Create(article.LabelData).Error
-	if err != nil || err1 != nil || err2 != nil || err3 != nil {
-		db.Rollback()
+	//LabelData = article.LabelData
+
+	dtx := db.Begin()
+	err := dtx.Model(Article{}).Where("id = ?", article.Id).Update(data).Error
+	var count int
+	dtx.Model(ArticleText{}).Where("article_id = ?", article.Id).Count(&count)
+	var err1 error
+	if count == 0 {
+		/**
+			新增
+		 */
+		var articleText ArticleText
+		articleText.ArticleId = article.Id
+		articleText.Text = article.TextData.Text
+		articleText.Markdown = article.TextData.Markdown
+		articleText.OperatorId = 1
+		articleText.OperatorName = "系统"
+		articleText.CreateTime = time.Now()
+
+		err1 = dtx.Model(&articleText).Create(&articleText).Error
+	} else {
+		err1 = dtx.Model(ArticleText{}).Where("article_id = ?", article.Id).Update(TextData).Error
+	}
+	err2 := dtx.Where("article_id = ?", article.Id).Delete(&ArticleLabel{}).Error
+
+	for _, LabelData := range article.LabelData {
+		err3 := dtx.Model(&ArticleLabel{}).Create(&LabelData).Error
+		if err3 != nil {
+			dtx.Rollback()
+			return false, err
+		}
+	}
+	if err != nil || err1 != nil || err2 != nil {
+		dtx.Rollback()
 		return false, err
 	}
-	db.Commit()
+	dtx.Commit()
 	return true, nil
 }
 
