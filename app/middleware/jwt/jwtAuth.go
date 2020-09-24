@@ -53,7 +53,9 @@ func GetJwtTokenMiddleware(uid int) (string, error) {
 	}
 }
 
-//JwtParseUser 解析payload的内容,得到用户信息
+/**
+JwtParseUser 解析payload的内容,得到用户信息
+ */
 func JwtParseUser(c *gin.Context) (interface{}, error) {
 	claims := make(jwt.MapClaims)
 	tokenString, errToken := ExtractToken(c)
@@ -69,11 +71,11 @@ func JwtParseUser(c *gin.Context) (interface{}, error) {
 	if err != nil {
 		return nil, errors.New("-1002")
 	}
-	token, err := RefaceJwtToken(claims)
-	if err == nil {
-		// 设置token header 头
-		c.Header("Authorization", "Bearer "+token)
-	}
+	//token, err := RefaceJwtToken(claims)
+	//if err == nil {
+	//	// 设置token header 头
+	//	c.Header("Authorization", "Bearer "+token)
+	//}
 	return claims["uid"], nil
 }
 
@@ -124,30 +126,3 @@ func GetIdFromClaims(key string, claims jwt.Claims) string {
 	}
 	return ""
 }
-
-// 示例 ：GetIdFromClaims("username", token.claims) 其中token是已经解密的token
-
-/**
-获取参数里面的值
-*/
-// 示例 ：GetIdFromClaims("username", token.claims) 其中token是已经解密的token   UserParam
-//func GetIdFromClaims(key string, claims jwt.Claims) (interface{}) {
-//	var userParam = UserParam
-//	fmt.Println(key)
-//	v := reflect.ValueOf(claims)
-//	if v.Kind() == reflect.Map {
-//		for _, k := range v.MapKeys() {
-//			value := v.MapIndex(k)
-//			fmt.Println(fmt.Sprintf("%s", k.Interface()))
-//			if fmt.Sprintf("%s", k.Interface()) == key {
-//				return value
-//				//fmt.Println("aasdadad")
-//				//uid := fmt.Sprintf("%v", value.Interface())
-//				// userParam {
-//				//	uid : v
-//				//}
-//			}
-//		}
-//	}
-//	return userParam
-//}

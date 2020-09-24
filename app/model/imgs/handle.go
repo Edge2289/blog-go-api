@@ -68,13 +68,13 @@ func (ImgsCate *ImgsCategory) GetImgsCategorys() ([]ImgsCategory, error) {
 /**
 新增图片分类
 */
-func (ImgsCate *ImgsCategory) AddImsCategory() (bool, error) {
+func (ImgCate *ImgsCategory) AddImsCategory() (bool, error) {
 
-	ImgsCate.IsState = 1
-	if ImgsCate.Sort == 0 {
-		ImgsCate.Sort = 50
+	ImgCate.IsState = 1
+	if ImgCate.Sort == 0 {
+		ImgCate.Sort = 50
 	}
-	err := db.Eloquent.Debug().Model(&ImgsCate).Create(&ImgsCate).Error
+	err := db.Eloquent.Create(&ImgCate).Error
 	if err != nil {
 		return false, err
 	}

@@ -2,6 +2,7 @@ package imgs
 
 import (
 	db "blog-go-api/app/model"
+	"strings"
 	"time"
 )
 
@@ -41,9 +42,9 @@ func (imgs *Imgs) AddImg() (bool, error) {
 /**
 删除如萍
 */
-func (imgs *Imgs) DelImg() (bool, error) {
+func (imgs *Imgs) DelImg(ids string) (bool, error) {
 
-	err := db.Eloquent.Model(&imgs).Where("id = ? ", imgs.Id).Delete(&imgs).Error
+	err := db.Eloquent.Where("id in (?) ", ids).Delete(&imgs).Error
 	if err != nil {
 		return false, err
 	}
@@ -71,32 +72,29 @@ func (imgs *Imgs) GetImgsCount() (int, error) {
 /**
 获取图片
 */
-func (imgs *Imgs) GetImgs(page, pageSize int) ([]Imgs, error) {
+func (imgs *Imgs) GetImgs(page, pageSize int) ([]Imgs, int, error) {
 	var imgsData []Imgs
 	dbModel := db.Eloquent.Model(&imgs)
-	if imgs.CateId != 0 {
+	if imgs.CateId != -1 {
 		dbModel = dbModel.Where("cate_id = ? ", imgs.CateId)
-	}
-	if page == 0 {
-		page = 1
-	}
-	if pageSize == 0 {
-		pageSize = 30
 	}
 	// 分页
 	err := dbModel.Offset((page - 1) * pageSize).Limit(pageSize).Find(&imgsData).Error
 	if err != nil {
-		return imgsData, err
+		return imgsData, 0, err
 	}
-	return imgsData, err
+	var count int
+	_ = dbModel.Count(&count).Error
+	return imgsData, count, err
 }
 
 /**
 更新图片分类
-*/
-func (imgs *Imgs) UpdateImsCategory() (bool, error) {
-
-	err := db.Eloquent.Model(&imgs).Where("id = ? ", imgs.Id).Updates(&imgs).Error
+ */
+func (imgs *Imgs) UpdateImsCategory(ids string) (bool, error) {
+	data := make(map[string]interface{})
+	data["cate_id"] = imgs.CateId
+	err := db.Eloquent.Model(&imgs).Where("id in (?) ", strings.Split(ids, ",")).Updates(data).Error
 	if err != nil {
 		return false, err
 	}

@@ -15,6 +15,7 @@ func Assert(condition bool, msg string, c *gin.Context) {
 		statusCode := 400
 		utilGin := json.Gin{Ctx: c}
 		utilGin.Success(statusCode, msg, nil)
+		c.Abort()
 		panic("CustomErroe#" + strconv.Itoa(statusCode) + "#" + msg)
 		return
 	}
@@ -30,8 +31,13 @@ func AssertErr(err error, msg string, c *gin.Context) {
 		if msg == "" {
 			msg = err.Error()
 		}
+		if msg == "-1003" {
+			// 重新登录
+			statusCode = 401
+		}
 		utilGin := json.Gin{Ctx: c}
 		utilGin.Success(statusCode, msg, nil)
+		c.Abort()
 		panic("CustomErroe#" + strconv.Itoa(statusCode) + "#" + msg)
 		return
 	}
@@ -45,6 +51,7 @@ func AssertCode(code int, msg string, c *gin.Context) {
 		statusCode := code
 		utilGin := json.Gin{Ctx: c}
 		utilGin.Success(statusCode, msg, nil)
+		c.Abort()
 		panic("CustomErroe#" + strconv.Itoa(statusCode) + "#" + msg)
 		return
 	}

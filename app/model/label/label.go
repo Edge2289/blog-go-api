@@ -47,7 +47,13 @@ func (label Label) AddLabel() (bool, error) {
 */
 func (label Label) UpdateLabel() (bool, error) {
 
-	err := db.Eloquent.Debug().Model(&label).Where("id = ?", label.Id).Update(&label).Error
+	data := make(map[string]interface{})
+
+	data["label"] = label.Label
+	data["color"] = label.Color
+	data["is_state"] = label.IsState
+
+	err := db.Eloquent.Model(Label{}).Where("id = ?", label.Id).Updates(data).Error
 	if err != nil {
 		return false, err
 	}
@@ -73,6 +79,9 @@ func (label Label) GetLabel(page, pageSize int) ([]Label, int, error) {
 
 	var labelData []Label
 	labelModel := db.Eloquent.Model(&label)
+	if label.Id != 0 {
+		labelModel = labelModel.Where("id = ?", label.Id)
+	}
 	if label.Label != "" {
 		labelModel = labelModel.Where("label like ?", "%"+label.Label+"%")
 	}
@@ -80,7 +89,7 @@ func (label Label) GetLabel(page, pageSize int) ([]Label, int, error) {
 		labelModel = labelModel.Where("is_state = ?", label.IsState)
 	}
 
-	error := labelModel.Offset((page - 1) * pageSize).Limit(pageSize).Find(&labelData).Error
+	error := labelModel.Offset((page - 1) * pageSize).Limit(pageSize).Order("id DESC").Find(&labelData).Error
 	if error != nil {
 		return labelData, 0, error
 	}

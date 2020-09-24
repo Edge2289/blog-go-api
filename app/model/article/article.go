@@ -2,7 +2,6 @@ package article
 
 import (
 	dbModel "blog-go-api/app/model"
-	"fmt"
 	"time"
 )
 
@@ -67,9 +66,13 @@ func (article Article) GetSearchList(label string, page, pageSize int) ([]Articl
 		// 分类搜索条件不为0
 		articleModel = articleModel.Where("cate_id = ? ", article.CateId)
 	}
+	// 分类搜索条件不为0
+	if article.Id != 0 {
+		articleModel = articleModel.Where("id = ? ", article.Id)
+	}
 	if label != "" {
 		var articleLabelList []ArticleLabel
-		err := db.Model(&articleLabelList).Debug().Select("article_id").Where("label_id = ?", label).Find(&articleLabelList).Error
+		err := db.Model(&articleLabelList).Select("article_id").Where("label_id = ?", label).Find(&articleLabelList).Error
 		if err != nil {
 			return articleList, 0, err
 		}
@@ -91,12 +94,12 @@ func (article Article) GetSearchList(label string, page, pageSize int) ([]Articl
 		// 标题搜索条件不为0
 		articleModel = articleModel.Where("nick like ? ", "%"+article.Nick+"%")
 	}
-	if article.IsState != 0 {
+	if article.IsState != -1 {
 		// 标题搜索条件不为0
 		articleModel = articleModel.Where("is_state = ?", article.IsState)
 	}
 
-	err := articleModel.Preload("LabelData").Offset((page - 1) * pageSize).Limit(pageSize).Find(&articleList).Error
+	err := articleModel.Preload("LabelData").Preload("TextData").Offset((page - 1) * pageSize).Limit(pageSize).Order("id DESC").Find(&articleList).Error
 	if err != nil {
 		return articleList, 0, err
 	}
@@ -107,54 +110,88 @@ func (article Article) GetSearchList(label string, page, pageSize int) ([]Articl
 }
 
 /**
-获取文章的明细
-	过来的是文章id
-*/
-func (article Article) GetArticleDetail() (articleDetail Article, err error) {
-
-	err = db.Model(&article).Preload("LabelData").Preload("ClickList").Preload("TextData").Preload("CommentsList").Where("id = ? and is_state = 1", article.Id).Find(&articleDetail).Error
-	return articleDetail, err
-}
-
-/**
 新增文章
 使用事务操作
 */
 func (article Article) AddArticleDetail() (bool, error) {
-
-	fmt.Println("-----------")
-	fmt.Println(article.Id)
 	err := db.Model(&article).Create(&article).Error
 	if err != nil {
 		return false, err
 	}
-	fmt.Println("-----------")
-	fmt.Println(article.Id)
-
-	// 添加文章明细
-	//article.TextData.ArticleId = article.Id
-	//_, err = AddArticleText(article.TextData)
-	//if err != nil {
-	//	return false, err
-	//}
-	//// 添加文章标签
-	//c, err := AddArticleLabel(article.LabelData)
-	//if !b || !c {
-	//	tx.Rollback()
-	//	return false, err
-	//}
-
-	//// 发生错误时回滚事务
-	//tx.Rollback()
-
-	fmt.Println(11)
 	return true, nil
 }
 
 /**
 修改文章
 */
+func (article Article) UpdateArticleDetail() (bool, error) {
+	/**
+		文章列表
+		文章标签
+		文章明细
+	 */
+	var data = make(map[string]interface{})
+	var TextData = make(map[string]interface{})
+
+	data["is_state"] = article.IsState
+	data["cateId"] = article.CateId
+	data["title"] = article.Title
+	data["nick"] = article.Nick
+	data["describe"] = article.Describe
+	data["img"] = article.Img
+	data["introduction"] = article.Introduction
+	data["is_comment"] = article.IsComment
+
+	TextData["text"] = article.TextData.Text
+	TextData["markdown"] = article.TextData.Markdown
+
+	//LabelData = article.LabelData
+
+	dtx := db.Begin()
+	err := dtx.Model(Article{}).Where("id = ?", article.Id).Update(data).Error
+	var count int
+	dtx.Model(ArticleText{}).Where("article_id = ?", article.Id).Count(&count)
+	var err1 error
+	if count == 0 {
+		/**
+			新增
+		 */
+		var articleText ArticleText
+		articleText.ArticleId = article.Id
+		articleText.Text = article.TextData.Text
+		articleText.Markdown = article.TextData.Markdown
+		articleText.OperatorId = 1
+		articleText.OperatorName = "系统"
+		articleText.CreateTime = time.Now()
+
+		err1 = dtx.Model(&articleText).Create(&articleText).Error
+	} else {
+		err1 = dtx.Model(ArticleText{}).Where("article_id = ?", article.Id).Update(TextData).Error
+	}
+	err2 := dtx.Where("article_id = ?", article.Id).Delete(&ArticleLabel{}).Error
+
+	for _, LabelData := range article.LabelData {
+		err3 := dtx.Model(&ArticleLabel{}).Create(&LabelData).Error
+		if err3 != nil {
+			dtx.Rollback()
+			return false, err
+		}
+	}
+	if err != nil || err1 != nil || err2 != nil {
+		dtx.Rollback()
+		return false, err
+	}
+	dtx.Commit()
+	return true, nil
+}
 
 /**
-删除文章
+	删除文章
 */
+func (article Article) DelArticleDetail() (bool, error) {
+	err := db.Where("id = ?", article.Id).Delete(&Article{}).Error
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}

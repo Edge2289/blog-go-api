@@ -2,7 +2,6 @@ package imgutils
 
 import (
 	imgsModel "blog-go-api/app/model/imgs"
-	"blog-go-api/utils/json"
 	"fmt"
 	"testing"
 )

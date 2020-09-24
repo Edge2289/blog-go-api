@@ -22,7 +22,7 @@ func TestArticleList(t *testing.T) {
 
 	var article article.Article
 	//article.Title = "測試"
-	data, _, _ := article.GetSearchList("1", 1, 30)
+	data, _, _ := article.GetSearchList("", 1, 30)
 	for _, v := range data {
 		fmt.Println("-------------------")
 		fmt.Println(v)
@@ -35,10 +35,10 @@ func TestArticleList(t *testing.T) {
 测试获取文档
 */
 func TestArticleDetail(t *testing.T) {
-	var article article.Article
-	article.Id = 1
-	data, _ := article.GetArticleDetail()
-	fmt.Println(data)
+	//var article article.Article
+	//article.Id = 1
+	//data, count, _ := article.GetArticleDetail(1, 30)
+	//fmt.Println(count, data)
 }
 
 /**
@@ -54,6 +54,40 @@ func TestAddArticleDetail(t *testing.T) {
 	//主线程等待
 	workResultLock.Wait()
 	fmt.Print("結束")
+}
+func TestUpdateArticleDetail(t *testing.T)  {
+
+
+	var articleText article.ArticleText
+	var articleBi article.Article
+	articleBi.Id = 3
+	articleBi.Title = "测试新"
+	articleBi.Describe = "测试新增文档"
+	articleBi.Img = "测试新增文档ImgasS12123"
+	articleBi.Nick = "测试新增文档aSasNick12313"
+	articleBi.CateId = rand.Intn(1000000)
+	articleBi.Introduction = "1"
+	articleBi.IsComment = 1
+	articleBi.IsState = 1
+	articleBi.ClickNum = 1
+	articleBi.ReadNum = 1
+
+	// 明细
+	articleText.Text = "Textxxxx"
+	articleText.Markdown = "Markdownasdasda"
+
+	//
+
+	var art[] article.ArticleLabel
+	for i := 0; i < 10; i++ {
+		art = append(art, article.ArticleLabel{
+			LabelId: i,
+		})
+	}
+
+	articleBi.TextData = articleText
+	articleBi.LabelData = art
+	_,_ =articleBi.UpdateArticleDetail()
 }
 
 func addArticle() {
@@ -79,7 +113,17 @@ func addArticle() {
 		articleText.Text = "Textxxxx" + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000))
 		articleText.Markdown = "Markdownasdasda" + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000)) + tools.IntToString(rand.Intn(1000000000000))
 
-		// 标签
+		//
+
+		var art[] article.ArticleLabel
+		for i := 0; i < 10; i++ {
+			//art[i] = article.ArticleLabel{
+			//
+			//}
+			art = append(art, article.ArticleLabel{
+				LabelId: i,
+			})
+		}
 
 		label := []article.ArticleLabel{
 			article.ArticleLabel{

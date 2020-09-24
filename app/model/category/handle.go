@@ -41,7 +41,7 @@ func (category Category) GetList(page int, pageSize int) ([]Category, int, error
 		categoryModel = categoryModel.Where("is_state = ?", category.IsState)
 	}
 	// 搜索條件
-	err := categoryModel.Offset((page - 1) * pageSize).Limit(pageSize).Find(&categoryList).Error
+	err := categoryModel.Offset((page - 1) * pageSize).Limit(pageSize).Order("id DESC").Find(&categoryList).Error
 	if err != nil {
 		return categoryList, 0, err
 	}

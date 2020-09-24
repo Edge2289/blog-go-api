@@ -23,9 +23,6 @@ func AddLabel(c *gin.Context) {
 	label.Label = c.Request.FormValue("label")
 	label.Color = c.Request.FormValue("color")
 	label.IsState, _ = strconv.Atoi(c.Request.FormValue("is_state"))
-	fmt.Println("------------------")
-	fmt.Println(label)
-	fmt.Println("------------------")
 	data, err := labelService.AddLabel(label)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil || !data {
@@ -48,7 +45,7 @@ func UpdateLabel(c *gin.Context) {
 	label.Label = c.Request.FormValue("label")
 	label.Color = c.Request.FormValue("color")
 	label.IsState, _ = strconv.Atoi(c.Request.FormValue("is_state"))
-
+	fmt.Println("label", label)
 	data, err := labelService.UpdateLabel(label)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil || !data {
@@ -68,6 +65,7 @@ func DelLabel(c *gin.Context) {
 	//jsonc.Unmarshal(data, &label)
 
 	label.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
+	fmt.Println(label)
 	data, err := labelService.DelLabel(label)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil || !data {
@@ -85,6 +83,7 @@ func GetLabel(c *gin.Context) {
 	//data, _ := ioutil.ReadAll(c.Request.Body)
 	//jsonc.Unmarshal(data, &label)
 
+	label.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
 	label.Label = c.Request.FormValue("label")
 	label.IsState, _ = strconv.Atoi(c.Request.FormValue("is_state"))
 

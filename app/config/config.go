@@ -36,13 +36,15 @@ const (
 	MqPwd  = "123456"
 
 	// 七牛云配置
-	ACCESS_KEY = "Q0zPp-M3h3Ct5-p5IFCmAmyX89ZpvQbu-DVb1dmM"
-	SECRET_KEY = "dzbhcSBBF0PnilMcMDVKz-ykLAxP5jkP0tRyKXJV"
-	BUCKET     = "treenblogimg" // 存储的空间名称
-	ImgDomain  = "http://q9onx63t3.bkt.clouddn.com/"
+	AccessKey = "Q0zPp-M3h3Ct5-p5IFCmAmyX89ZpvQbu-DVb1dmM"
+	SecretKey = "dzbhcSBBF0PnilMcMDVKz-ykLAxP5jkP0tRyKXJV"
+	BUCKET    = "treenblogimg" // 存储的空间名称
+	ImgDomain = "http://qiniuyunoss.uikiss.cn/"
 
 	// es
-	ES_HOST = "http://139.9.38.4:9200/"
+	EsHost  = "http://192.168.174.131:9200/" // "http://139.9.38.4:9200/"
+	EsIndex = "employee_type"
+	EsType  = "employee"
 
 	// JWT加密参数
 	JwtSecretKey  = "xiaoxiao-blog-gp-api"
@@ -56,19 +58,4 @@ const (
 	LogDirName = "storage/logs/api/"
 	LogDrive   = "file" // file 文件日志   es  MQ  英文逗号隔开，推送日志
 
-	/**
-	 * 邮箱配置
-	 */
-	SystemEmailUser = "xinliangnote@163.com"
-	SystemEmailPass = "" //密码或授权码
-	SystemEmailHost = "smtp.163.com"
-	SystemEmailPort = 465
-
-	/**
-	 * 这个是告警的配置
-	 */
-	// 告警接收人
-	ErrorNotifyUser = "xinliangnote@163.com"
-	// 告警开关 1=开通 -1=关闭
-	ErrorNotifyOpen = -1
 )

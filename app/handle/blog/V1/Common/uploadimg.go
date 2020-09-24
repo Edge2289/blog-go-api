@@ -5,6 +5,7 @@ import (
 	imgsModel "blog-go-api/app/model/imgs"
 	"blog-go-api/utils/json"
 	uploadimg "blog-go-api/utils/storage/qiniu"
+	"blog-go-api/utils/tools"
 
 	//jsonc "encoding/json"
 	"github.com/gin-gonic/gin"
@@ -13,19 +14,25 @@ import (
 	"strconv"
 )
 
+type Img struct {
+	Ids string `json:"ids"`
+	Data   string `json:"data"`
+	CateId  int `json:"cate_id"`
+}
+
 /**
 上传图片
 */
 func UploadImg(c *gin.Context) {
 
 	var img imgsModel.Imgs
+	var imgData Img
 	//data, _ := ioutil.ReadAll(c.Request.Body)
 	//jsonc.Unmarshal(data, &img)
 
-	data := c.Request.FormValue("data")
-	var imgData = []byte(data)
+	_ = c.BindJSON(&imgData)
 	// 上传七牛云
-	name, err := uploadimg.Upload(imgData)
+	name, err := uploadimg.Upload([]byte(imgData.Data))
 	utilGin := json.Gin{Ctx: c}
 	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "-11000", nil)
@@ -53,19 +60,16 @@ func UploadImg(c *gin.Context) {
 func GetImg(c *gin.Context) {
 
 	var img imgsModel.Imgs
-	//data, _ := ioutil.ReadAll(c.Request.Body)
-	//jsonc.Unmarshal(data, &img)
-
 	img.CateId, _ = strconv.Atoi(c.Request.FormValue("cate_id"))
-	page, _ := strconv.Atoi(c.Request.FormValue("page"))
-	pageSize, _ := strconv.Atoi(c.Request.FormValue("pageSize"))
-	data, err := img.GetImgs(page, pageSize)
+	page := tools.GetPage(c)
+	pageSize := tools.GetPageSize(c)
+	data, count, err := img.GetImgs(page, pageSize)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "-1101", nil)
 		return
 	}
-	utilGin.Success(http.StatusOK, "", data)
+	utilGin.PageOK(data, count, page, pageSize)
 }
 
 /**
@@ -73,12 +77,11 @@ func GetImg(c *gin.Context) {
 */
 func DelImg(c *gin.Context) {
 
-	var img imgsModel.Imgs
-	//data, _ := ioutil.ReadAll(c.Request.Body)
-	//jsonc.Unmarshal(data, &img)
+	var imgModel imgsModel.Imgs
+	var img Img
+	_ = c.BindJSON(&img)
 
-	img.CateId, _ = strconv.Atoi(c.Request.FormValue("cate_id"))
-	i, err := img.DelImg()
+	i, err := imgModel.DelImg(img.Ids)
 	utilGin := json.Gin{Ctx: c}
 	if err != nil {
 		utilGin.Fail(http.StatusBadRequest, "-1102", nil)
@@ -96,13 +99,11 @@ func DelImg(c *gin.Context) {
 */
 func MvImgCategory(c *gin.Context) {
 
-	var img imgsModel.Imgs
-	//data, _ := ioutil.ReadAll(c.Request.Body)
-	//jsonc.Unmarshal(data, &img)
-
-	img.Id, _ = strconv.Atoi(c.Request.FormValue("id"))
-	img.CateId, _ = strconv.Atoi(c.Request.FormValue("cate_id"))
-	i, err := img.UpdateImsCategory()
+	var imgModel imgsModel.Imgs
+	var img Img
+	_ = c.BindJSON(&img)
+	imgModel.CateId = img.CateId
+	i, err := imgModel.UpdateImsCategory(img.Ids)
 
 	utilGin := json.Gin{Ctx: c}
 	if err != nil {
