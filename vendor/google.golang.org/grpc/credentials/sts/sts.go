@@ -62,6 +62,7 @@ var (
 	makeHTTPDoer         = makeHTTPClient
 	readSubjectTokenFrom = ioutil.ReadFile
 	readActorTokenFrom   = ioutil.ReadFile
+	logger               = grpclog.Component("credentials")
 )
 
 // Options configures the parameters used for an STS based token exchange.
@@ -108,6 +109,10 @@ type Options struct {
 	// https://tools.ietf.org/html/rfc8693#section-3, that indicates the type of
 	// the the security token in the "actor_token_path" parameter.
 	ActorTokenType string // Optional.
+}
+
+func (o Options) String() string {
+	return fmt.Sprintf("%s:%s:%s:%s:%s:%s:%s:%s:%s", o.TokenExchangeServiceURI, o.Resource, o.Audience, o.Scope, o.RequestedTokenType, o.SubjectTokenPath, o.SubjectTokenType, o.ActorTokenPath, o.ActorTokenType)
 }
 
 // NewCredentials returns a new PerRPCCredentials implementation, configured
@@ -212,7 +217,7 @@ func validateOptions(opts Options) error {
 		return err
 	}
 	if u.Scheme != "http" && u.Scheme != "https" {
-		return fmt.Errorf("scheme is not supported: %s. Only http(s) is supported", u.Scheme)
+		return fmt.Errorf("scheme is not supported: %q. Only http(s) is supported", u.Scheme)
 	}
 
 	if opts.SubjectTokenPath == "" {
@@ -311,7 +316,7 @@ func sendRequest(client httpDoer, req *http.Request) ([]byte, error) {
 	if resp.StatusCode == http.StatusOK {
 		return body, nil
 	}
-	grpclog.Warningf("http status %d, body: %s", resp.StatusCode, string(body))
+	logger.Warningf("http status %d, body: %s", resp.StatusCode, string(body))
 	return nil, fmt.Errorf("http status %d, body: %s", resp.StatusCode, string(body))
 }
 

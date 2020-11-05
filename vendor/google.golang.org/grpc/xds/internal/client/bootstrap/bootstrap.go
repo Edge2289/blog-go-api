@@ -33,6 +33,8 @@ import (
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/google"
+	"google.golang.org/grpc/credentials/tls/certprovider"
+	"google.golang.org/grpc/internal"
 	"google.golang.org/grpc/xds/internal/version"
 )
 
@@ -47,7 +49,8 @@ const (
 	serverFeaturesV3 = "xds_v3"
 
 	// Type name for Google default credentials.
-	googleDefaultCreds              = "google_default"
+	credsGoogleDefault              = "google_default"
+	credsInsecure                   = "insecure"
 	gRPCUserAgentName               = "gRPC Go"
 	clientFeatureNoOverprovisioning = "envoy.lb.does_not_support_overprovisioning"
 )
@@ -76,6 +79,18 @@ type Config struct {
 	// NodeProto contains the Node proto to be used in xDS requests. The actual
 	// type depends on the transport protocol version used.
 	NodeProto proto.Message
+	// CertProviderConfigs contain parsed configs for supported certificate
+	// provider plugins found in the bootstrap file.
+	CertProviderConfigs map[string]CertProviderConfig
+}
+
+// CertProviderConfig wraps the certificate provider plugin name and config
+// (corresponding to one plugin instance) found in the bootstrap file.
+type CertProviderConfig struct {
+	// Name is the registered name of the certificate provider.
+	Name string
+	// Config is the parsed config to be passed to the certificate provider.
+	Config certprovider.StableConfig
 }
 
 type channelCreds struct {
@@ -102,6 +117,16 @@ type xdsServer struct {
 //        }
 //      ],
 //      "server_features": [ ... ]
+//		"certificate_providers" : {
+//			"default": {
+//				"plugin_name": "default-plugin-name",
+//				"config": { default plugin config in JSON }
+//			},
+//			"foo": {
+//				"plugin_name": "foo",
+//				"config": { foo plugin config in JSON }
+//			}
+//		}
 //    },
 //    "node": <JSON form of Node proto>
 // }
@@ -161,9 +186,12 @@ func NewConfig() (*Config, error) {
 			xs := servers[0]
 			config.BalancerName = xs.ServerURI
 			for _, cc := range xs.ChannelCreds {
-				if cc.Type == googleDefaultCreds {
+				// We stop at the first credential type that we support.
+				if cc.Type == credsGoogleDefault {
 					config.Creds = grpc.WithCredentialsBundle(google.NewDefaultCredentials())
-					// We stop at the first credential type that we support.
+					break
+				} else if cc.Type == credsInsecure {
+					config.Creds = grpc.WithInsecure()
 					break
 				}
 			}
@@ -178,6 +206,39 @@ func NewConfig() (*Config, error) {
 					serverSupportsV3 = true
 				}
 			}
+		case "certificate_providers":
+			var providerInstances map[string]json.RawMessage
+			if err := json.Unmarshal(v, &providerInstances); err != nil {
+				return nil, fmt.Errorf("xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v", string(v), k, err)
+			}
+			configs := make(map[string]CertProviderConfig)
+			getBuilder := internal.GetCertificateProviderBuilder.(func(string) certprovider.Builder)
+			for instance, data := range providerInstances {
+				var nameAndConfig struct {
+					PluginName string          `json:"plugin_name"`
+					Config     json.RawMessage `json:"config"`
+				}
+				if err := json.Unmarshal(data, &nameAndConfig); err != nil {
+					return nil, fmt.Errorf("xds: json.Unmarshal(%v) for field %q failed during bootstrap: %v", string(v), instance, err)
+				}
+
+				name := nameAndConfig.PluginName
+				parser := getBuilder(nameAndConfig.PluginName)
+				if parser == nil {
+					// We ignore plugins that we do not know about.
+					continue
+				}
+				cfg := nameAndConfig.Config
+				c, err := parser.ParseConfig(cfg)
+				if err != nil {
+					return nil, fmt.Errorf("xds: Config parsing for plugin %q failed: %v", name, err)
+				}
+				configs[instance] = CertProviderConfig{
+					Name:   name,
+					Config: c,
+				}
+			}
+			config.CertProviderConfigs = configs
 		}
 		// Do not fail the xDS bootstrap when an unknown field is seen. This can
 		// happen when an older version client reads a newer version bootstrap
@@ -185,7 +246,10 @@ func NewConfig() (*Config, error) {
 	}
 
 	if config.BalancerName == "" {
-		return nil, fmt.Errorf("xds: Required field %q not found in bootstrap", "xds_servers.server_uri")
+		return nil, fmt.Errorf("xds: Required field %q not found in bootstrap %s", "xds_servers.server_uri", jsonData["xds_servers"])
+	}
+	if config.Creds == nil {
+		return nil, fmt.Errorf("xds: Required field %q doesn't contain valid value in bootstrap %s", "xds_servers.channel_creds", jsonData["xds_servers"])
 	}
 
 	// We end up using v3 transport protocol version only if the following
@@ -195,6 +259,10 @@ func NewConfig() (*Config, error) {
 	// 2. Environment variable "GRPC_XDS_EXPERIMENTAL_V3_SUPPORT" is set to
 	//    true.
 	// The default value of the enum type "version.TransportAPI" is v2.
+	//
+	// TODO: there are multiple env variables, GRPC_XDS_BOOTSTRAP and
+	// GRPC_XDS_EXPERIMENTAL_V3_SUPPORT. Move all env variables into a separate
+	// package.
 	if v3Env := os.Getenv(v3SupportEnv); v3Env == "true" {
 		if serverSupportsV3 {
 			config.TransportAPI = version.TransportV3

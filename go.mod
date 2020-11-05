@@ -10,7 +10,7 @@ require (
 	github.com/google/uuid v1.1.1
 	// github.com/google/uuid v1.1.1
 	github.com/jinzhu/gorm v1.9.12
-	github.com/mojocn/base64Captcha v1.3.1
+	github.com/mojocn/base64Captcha v1.3.1 // indirect
 	github.com/olivere/elastic/v7 v7.0.19
 	github.com/qiniu/api.v7/v7 v7.5.0
 	// github.com/qiniu/api.v7 v7.2.5+incompatible // indirect

@@ -26,27 +26,27 @@ func TestArticleList(t *testing.T) {
 
 	defer conn.Close()
 
-	//c := pb.NewHelloClient(conn)
+	c := pb.NewHelloClient(conn)
 	//
-	//name := "lin ---- xxx"
+	name := "lin ---- xxx"
 	////if len(os.Args) > 1 {
 	////	name = os.Args[1]
 	////}
 	//
-	//r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
+	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
 	//
 	//if err != nil {
 	//	log.Fatalf("could not greet: %v", err)
 	//}
 	//
-	//fmt.Println("---------------------------")
-	//fmt.Println(r.Message)
-	//fmt.Println("---------------------------")
+	fmt.Println("-----------r----------------")
+	fmt.Println(r.Message)
+	fmt.Println("------------r---------------")
 
 	 var intName int64 = 10
 	a := pb.NewAdditionClient(conn)
 	ar, _ := a.Addition(context.Background(), &pb.AdditionRequest{Name: intName})
-	fmt.Println("---------------------------")
+	fmt.Println("----------a-----------------")
 	fmt.Println(ar)
-	fmt.Println("---------------------------")
+	fmt.Println("-----------a----------------")
 }

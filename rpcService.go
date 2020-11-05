@@ -1,6 +1,7 @@
 package main
 
 //import (
+//	"blog-go-api/common"
 //	pb "blog-go-api/proto"
 //	"golang.org/x/net/context"
 //	"google.golang.org/grpc"
@@ -16,9 +17,10 @@ package main
 //type additionServer struct {}
 //
 //func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloResponse, error) {
-//log.Println("request: ", in.Name)
-//log.Println("request: ", in)
-//return &pb.HelloResponse{Message: "Hello 123415645" + in.Name}, nil
+//	log.Println("request: ", in.Name)
+//	log.Println("request: ", in)
+//
+//	return &pb.HelloResponse{Message: "Hello 123415645" + common.MD5(in.Name)}, nil
 //}
 //
 //func (s *additionServer) Addition(ctx context.Context, in *pb.AdditionRequest) (*pb.AdditionResponse, error) {

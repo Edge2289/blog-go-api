@@ -24,8 +24,8 @@ import (
 	"log"
 	"net"
 
-	// "google.golang.org/grpc"
-	// pb "google.golang.org/grpc/examples/helloworld/helloworld"
+	"google.golang.org/grpc"
+	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
 const (
@@ -48,9 +48,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	// s := grpc.NewServer()
-	// pb.RegisterGreeterServer(s, &server{})
-	// if err := s.Serve(lis); err != nil {
-	// 	log.Fatalf("failed to serve: %v", err)
-	// }
+	s := grpc.NewServer()
+	pb.RegisterGreeterServer(s, &server{})
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }

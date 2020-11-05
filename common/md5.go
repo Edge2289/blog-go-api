@@ -7,15 +7,6 @@ import (
 	"sort"
 )
 
-func Run() {
-	params := map[string]interface{}{
-		"name": "Tom",
-		"pwd":  "123456",
-		"age":  30,
-	}
-	fmt.Printf("sign : %s\n", createSign(params))
-}
-
 // MD5 方法
 func MD5(str string) string {
 	s := md5.New()

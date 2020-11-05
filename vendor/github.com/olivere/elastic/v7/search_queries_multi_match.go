@@ -39,7 +39,6 @@ type MultiMatchQuery struct {
 func NewMultiMatchQuery(text interface{}, fields ...string) *MultiMatchQuery {
 	q := &MultiMatchQuery{
 		text:        text,
-		fields:      make([]string, 0),
 		fieldBoosts: make(map[string]*float64),
 	}
 	q.fields = append(q.fields, fields...)
@@ -68,22 +67,34 @@ func (q *MultiMatchQuery) Type(typ string) *MultiMatchQuery {
 	switch strings.ToLower(typ) {
 	default: // best_fields / boolean
 		q.typ = "best_fields"
-		q.tieBreaker = &zero
+		if q.tieBreaker == nil {
+			q.tieBreaker = &zero
+		}
 	case "most_fields":
 		q.typ = "most_fields"
-		q.tieBreaker = &one
+		if q.tieBreaker == nil {
+			q.tieBreaker = &one
+		}
 	case "cross_fields":
 		q.typ = "cross_fields"
-		q.tieBreaker = &zero
+		if q.tieBreaker == nil {
+			q.tieBreaker = &zero
+		}
 	case "phrase":
 		q.typ = "phrase"
-		q.tieBreaker = &zero
+		if q.tieBreaker == nil {
+			q.tieBreaker = &zero
+		}
 	case "phrase_prefix":
 		q.typ = "phrase_prefix"
-		q.tieBreaker = &zero
+		if q.tieBreaker == nil {
+			q.tieBreaker = &zero
+		}
 	case "bool_prefix":
 		q.typ = "bool_prefix"
-		q.tieBreaker = &zero
+		if q.tieBreaker == nil {
+			q.tieBreaker = &zero
+		}
 	}
 	return q
 }
@@ -209,19 +220,21 @@ func (q *MultiMatchQuery) Source() (interface{}, error) {
 
 	multiMatch["query"] = q.text
 
-	if len(q.fields) > 0 {
-		var fields []string
-		for _, field := range q.fields {
-			if boost, found := q.fieldBoosts[field]; found {
-				if boost != nil {
-					fields = append(fields, fmt.Sprintf("%s^%f", field, *boost))
-				} else {
-					fields = append(fields, field)
-				}
+	var fields []string
+	for _, field := range q.fields {
+		if boost, found := q.fieldBoosts[field]; found {
+			if boost != nil {
+				fields = append(fields, fmt.Sprintf("%s^%f", field, *boost))
 			} else {
 				fields = append(fields, field)
 			}
+		} else {
+			fields = append(fields, field)
 		}
+	}
+	if fields == nil {
+		multiMatch["fields"] = []string{}
+	} else {
 		multiMatch["fields"] = fields
 	}
 
